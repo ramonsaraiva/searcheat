@@ -22,6 +22,15 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 
 controllers.controller('city_controller', ['$scope', '$routeParams', '$location', 'db', function($scope, $routeParams, $location, db) {
 	$scope.db = new db('cities');
-	
 	$scope.id = $routeParams.id;
+}]);
+
+controllers.controller('map_controller', ['$scope', function($scope) {
+	$scope.map = {
+		center: {
+			latitude: 45,
+			longitude: -73
+		},
+		zoom: 8
+	};
 }]);

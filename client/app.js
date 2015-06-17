@@ -3,7 +3,8 @@
 var app = angular.module('searcheat', [
 	'ngRoute',
 	'controllers',
-	'services'
+	'services',
+	'uiGmapgoogle-maps'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -13,5 +14,8 @@ app.config(['$routeProvider', function($routeProvider) {
 		})
 		.when('/city/:id/', {
 			templateUrl: 'partials/city.tpl.html'
+		})
+		.when('/map/', {
+			templateUrl: 'partials/map.tpl.html'
 		});
 }]);
