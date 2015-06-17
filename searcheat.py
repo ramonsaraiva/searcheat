@@ -17,11 +17,11 @@ api = Api(app)
 
 @app.route('/')
 def index():
-    return send_from_directory('templates', 'base.html')
+    return send_from_directory('client', 'main.html')
 
 @app.route('/<path:path>')
 def _static(path):
-    return send_from_directory('static', path)
+    return send_from_directory('client', path)
 
 # client commands
 
