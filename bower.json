@@ -1,0 +1,26 @@
+{
+	"name": "searcheat",
+	"version": "0.0.0",
+	"private": true,
+	"homepage": "https://github.com/ramonsaraiva/searcheat",
+	"authors": [
+		"Ramon Saraiva <ramonsaraiva@gmail.com>"
+	],
+	"description": "search eat foodtruck locator",
+	"license": "MIT",
+	"ignore": [
+	  "**/.*",
+	  "node_modules",
+	  "bower_components",
+	  "test",
+	  "tests"
+	],
+	"dependencies": {
+		"jquery": "~2.1.4",
+		"angular": "~1.4.0",
+		"bootstrap": "~3.3.4",
+		"angular-route": "~1.3.1"
+	},
+	"devDependencies": {
+	}
+}
