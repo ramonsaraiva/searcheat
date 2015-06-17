@@ -19,6 +19,13 @@ class City(db.Model):
     def __repr__(self):
         return '<City {0}:{1}'.format(self.id, self.name)
 
+    @property
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
+
 class Truck(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)

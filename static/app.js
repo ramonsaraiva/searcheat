@@ -9,5 +9,6 @@ var app = angular.module('searcheat', [
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
+			templateUrl: 'partials/guidance.tpl.html'
 		});
 }]);
