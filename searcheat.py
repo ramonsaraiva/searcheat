@@ -5,15 +5,21 @@ from flask.ext.restful import Api
 
 from models import db
 
+from resources import Cities
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 
 app.config.update({
-    'SQL_ALCHEMY_DATABASE_URI': 'postgres://searcheat:searcheat@localhost/searcheat'
+    'SQLALCHEMY_DATABASE_URI': 'postgres://searcheat:searcheat@localhost/searcheat'
 })
 
 db.init_app(app)
 api = Api(app)
+
+# resources
+
+api.add_resource(Cities, '/api/cities/', '/api/cities/<int:id>/')
 
 @app.route('/')
 def index():
