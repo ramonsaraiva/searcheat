@@ -16,6 +16,26 @@ body {
     box-sizing: border-box;
 }
 
+@font-face
+{
+	font-family: 'brain-flower';
+	src: url('/fonts/brain_flower_euro.ttf');
+}
+
+h1, h2, h3, h4, h5, h6, label
+{
+	font-family: 'brain-flower';
+	font-size: 2.4em;
+}
+
+/*
+input, button
+{
+	font-family: 'brain-flower'; !important
+	font-size: 4em; !important
+}
+*/
+
 #title
 {
 	position:relative;
