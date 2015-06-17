@@ -1,12 +1,12 @@
 <style>
     .angular-google-map-container {
-        margin: 20px auto;
+        margin: 150px auto;
         width: 800px;
         height: 400px;
     }
 </style>
 
-<div id="map-canvas" ng-controller="map_controller">
+<div id="map-canvas" ng-controller="map_controller" class="til">
     <ui-gmap-google-map center="map.center" zoom="map.zoom">
         <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
         </ui-gmap-marker>
