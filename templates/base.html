@@ -7,6 +7,9 @@
 		<!-- base css -->
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
+		<!-- custom css -->
+		<link rel ="stylesheet" href="css/main.css">
+
 		<!-- base js -->
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -22,9 +25,11 @@
 	</head>
 
 	<body>
-		<div id="title" class="text-center">
-			<h1>Search eat</h1>
+		<div class="container-fluid">
+			<div id="title" class="text-center">
+				<img src="img/searcheat.png" width="300px" />
+			</div>
+			<div ng-view></div>
 		</div>
-		<div ng-view></div>
 	</body>
 </html>
