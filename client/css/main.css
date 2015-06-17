@@ -1,10 +1,39 @@
+
 html, body, .container-fluid
 {
 	height: 100%;
+	width: auto !important;
+	overflow-x: hidden !important;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.complete
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-height: 100%;
+	height: 100%;
+	width: 100%;
+	padding-top: 230px;
 }
 
 .til
 {
-	background: url('/img/street-food.jpg');
 	height: 100%;
+
+	background: url('/img/street-food.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
