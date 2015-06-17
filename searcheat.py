@@ -22,3 +22,13 @@ def index():
 @app.route('/<path:path>')
 def _static(path):
     return send_from_directory('static', path)
+
+# client commands
+
+@app.cli.command()
+def create():
+    db.create_all()
+
+@app.cli.command()
+def drop():
+    db.drop_all()
