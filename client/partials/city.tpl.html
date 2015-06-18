@@ -18,17 +18,41 @@
 			<div class="row">
 				<div class="col-lg-3 col-lg-offset-9 col-xs-8 col-xs-offset-4">
 					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a></li>
-						<li role="presentation" class="active"><a href="#" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></li>
-						<li role="presentation" class="active"><a href="#" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></li>
+						<li role="presentation" class="">
+							<a data-target="#map-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
+						</li>
+						<li role="presentation" class="">
+							<a data-target="#list-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+						</li>
+						<li role="presentation" class="">
+							<a data-target="#envelope-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+						</li>
 					</ul>
 				</div>
 			</div>
-			<div id="map-canvas">
-				<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options" draggable="true">
-				<ui-gmap-markers models="trucks" coords="'self'"></ui-gmap-markers>
-				</ui-gmap-google-map>
+
+			<div class="tab-content">
+				<!-- MAP TAB -->
+				<div id="map-tab" class="tab-pane">
+					<div id="map-canvas">
+						<ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" options="options" draggable="true">
+						<ui-gmap-markers models="trucks" coords="'self'"></ui-gmap-markers>
+						</ui-gmap-google-map>
+					</div>
+				</div>
+				<!-- END OF MAP TAB -->
+
+				<!-- LIST TAB -->
+				<div id="list-tab" class="tab-pane">
+					<h1>LIST-TAB</h1>
+				</div>
+				<!-- END OF LIST TAB -->
+
+				<div id="envelope-tab" class="tab-pane">
+					<h1>fegreh</h1>
+				</div>
 			</div>
+
 		</div>
 	</div>
 </div>

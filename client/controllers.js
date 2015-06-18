@@ -25,6 +25,8 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	$scope.city = {}
 
 	$scope.map = {
+		control: {},
+
 		center: {
 			latitude: 40.1451,
 			longitude: -99.6680
