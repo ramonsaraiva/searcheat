@@ -31,7 +31,7 @@ controllers.controller('map_controller', ['$scope', function($scope) {
 			latitude: 40.1451,
 			longitude: -99.6680
 		},
-		zoom: 4
+		zoom: 8
 	};
 
 	$scope.marker = {
