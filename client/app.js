@@ -12,10 +12,7 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/', {
 			templateUrl: 'partials/guidance.tpl.html'
 		})
-		.when('/city/:id/', {
+		.when('/cidade/:id/', {
 			templateUrl: 'partials/city.tpl.html'
 		})
-		.when('/map/', {
-			templateUrl: 'partials/map.tpl.html'
-		});
 }]);

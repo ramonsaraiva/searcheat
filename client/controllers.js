@@ -14,7 +14,7 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 	};
 
 	$scope.search = function() {
-		$location.path('/city/' + $scope.city + '/');
+		$location.path('/cidade/' + $scope.city + '/');
 	};
 
 	$scope.list();
@@ -22,10 +22,8 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 
 controllers.controller('city_controller', ['$scope', '$routeParams', '$location', 'db', function($scope, $routeParams, $location, db) {
 	$scope.db = new db('cities');
-	$scope.id = $routeParams.id;
-}]);
+	$scope.city = {}
 
-controllers.controller('map_controller', ['$scope', function($scope) {
 	$scope.map = {
 		center: {
 			latitude: 40.1451,
@@ -52,4 +50,12 @@ controllers.controller('map_controller', ['$scope', function($scope) {
 			}
 		}
 	};
+
+	$scope.db.read($routeParams.id)
+		.success(function(data) {
+			$scope.city = data;
+		})
+		.error(function(e) {
+			$scope.city = null;
+		});
 }]);
