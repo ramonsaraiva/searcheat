@@ -7,8 +7,14 @@
 </style>
 
 <div ng-controller="map_controller">
+	<div id="header">
+		<div id="title" class="small">
+			<img src="img/searcheat_circle.png" />
+		</div>
+	</div>
+
 	<div class="row">
-		<div id="content" class="col-xs-4">
+		<div id="content" class="col-xs-7">
 			<div id="map-canvas">
 				<ui-gmap-google-map center="map.center" zoom="map.zoom">
 				<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">

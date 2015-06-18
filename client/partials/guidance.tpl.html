@@ -1,17 +1,17 @@
 <div ng-controller="guidance_controller">
-	<div id="header">
-	<div id="title" class="text-center">
+<div id="header">
+	<div id="title">
 		<img src="img/searcheat_circle.png" />
 	</div>
-	</div>
-	<div class="row text-center">
-		<div class="col-lg-4 col-md-6 col-xs-6 search-box">
-			<div class="form-group">
-				<label>Selecione a cidade</label>
-				<select ng-model="city" convert-to-number ng-options="city.id as city.name for city in data.cities" class="form-control text-center">
-				</select>
-			</div>
-			<button ng-click="search()" class="btn btn-danger form-control"><strong>Procurar</strong></button>
+</div>
+<div class="row text-center">
+	<div id="search-box" class="col-lg-4 col-md-6 col-xs-6">
+		<div class="form-group">
+			<label>Selecione a cidade</label>
+			<select ng-model="city" convert-to-number ng-options="city.id as city.name for city in data.cities" class="form-control text-center">
+			</select>
 		</div>
+		<button ng-click="search()" class="btn btn-danger form-control"><strong>Procurar</strong></button>
 	</div>
+</div>
 </div>
