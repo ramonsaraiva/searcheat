@@ -16,6 +16,10 @@ body {
     box-sizing: border-box;
 }
 
+.container-fluid {
+	padding: 0px;
+}
+
 @font-face
 {
 	font-family: 'brain-flower';
