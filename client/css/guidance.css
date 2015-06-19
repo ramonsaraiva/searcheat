@@ -1,0 +1,63 @@
+/*
+ * guidance.css
+ */
+
+/* de autoria do max */
+.row
+{
+   margin-left: 0;
+   margin-right: 0;
+}
+
+.container-fluid
+{
+	padding: 0px;
+}
+
+#guidance-view
+{
+	height: 100%;
+	max-width: 910px;
+	min-width: 410px;
+	margin: 0 auto;
+}
+
+#search-box
+{
+	background: rgba(0, 0, 0, 0.4);
+	color: white;
+}
+
+#search-box-container
+{
+	margin-top: 150px;
+}
+
+#header
+{
+	text-align: center;
+	height: 250px;
+}
+
+#title img
+{
+	width: 250px;
+}
+
+#top-padding
+{
+	background-color: red;
+	height: 250px;
+	min-width: 410px;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#title
+{
+	z-index: 1000;
+	position: relative;
+	top: 130px;
+}
