@@ -1,11 +1,12 @@
-<div ng-controller="guidance_controller">
+<div id="guidance-view" ng-controller="guidance_controller">
 <div id="header">
+	<div style="background-color: red; height: 250px; width: 100%; position: absolute; left: 0; top: 0;"></div>
 	<div id="title">
 		<img src="img/searcheat_circle.png" />
 	</div>
 </div>
-<div class="row text-center">
-	<div id="search-box" class="col-lg-4 col-md-6 col-xs-6">
+<div style="margin-top: 150px;" class="row text-center">
+	<div id="search-box" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-sm-offset-3">
 		<div class="form-group">
 			<label>Selecione a cidade</label>
 			<select ng-model="city" convert-to-number ng-options="city.id as city.name for city in data.cities" class="form-control text-center">

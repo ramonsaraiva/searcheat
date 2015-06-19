@@ -112,10 +112,26 @@ input, button
 	color: white;
 }
 
+#city
+{
+	height: 100%;
+}
+
+#row
+{
+	height: 100%;
+}
+
+#content
+{
+	height: 100%;
+	overflow: auto;
+}
+
 ul
 {
 }
- 
+
 ul li a
 {
 
