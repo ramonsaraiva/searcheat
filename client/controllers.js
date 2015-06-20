@@ -22,31 +22,44 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 }]);
 
 controllers.controller('city_controller', ['$scope', '$routeParams', '$location', 'db', function($scope, $routeParams, $location, db) {
-	//$scope.db = new db('cities');
+	$scope.db = new db('cities');
 	$scope.city = {}
 
-	$scope.map = {
-		control: {},
+	$scope.db.read($routeParams.id)
+		.success(function(data) {
+			$scope.city = data;
+			$scope.map_init();
+			console.log($scope.city);
+		})
+		.error(function(e) {
+			$scope.city = null;
+		});
 
-		center: {
-			latitude: 40.1451,
-			longitude: -99.6680
-		},
-		zoom: 8
+	$scope.map_init = function()
+	{
+		$scope.map = {
+			control: {},
+
+			center: {
+				latitude: $scope.city.geoposition.latitude,
+				longitude: $scope.city.geoposition.longitude
+			},
+			zoom: 8
+		};
+
+		$scope.options = {
+			scrollwheel: false
+		};
+
+		$scope.trucks = [
+			{
+				id: 0,
+				latitude: 40.1451,
+				longitude: -99.6680,
+				title: 'igualop'
+			}
+		];
 	};
-
-	$scope.options = {
-		scrollwheel: false
-	};
-
-	$scope.trucks = [
-		{
-			id: 0,
-			latitude: 40.1451,
-			longitude: -99.6680,
-			title: 'igualop'
-		}
-	];
 
 	/*
 	$scope.marker = {
@@ -68,12 +81,5 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 		}
 	};
 
-	$scope.db.read($routeParams.id)
-		.success(function(data) {
-			$scope.city = data;
-		})
-		.error(function(e) {
-			$scope.city = null;
-		});
 	*/
 }]);
