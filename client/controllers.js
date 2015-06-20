@@ -10,6 +10,7 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 		$scope.db.list()
 			.success(function(data) {
 				$scope.data = data;
+				console.log($scope.data);
 			});
 	};
 
