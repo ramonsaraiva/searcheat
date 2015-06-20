@@ -5,7 +5,7 @@
 #top-padding
 {
 	background-color: red;
-	height: 250px;
+	height: 38px;
 	min-width: 410px;
 	width: 100%;
 	position: absolute;
@@ -13,12 +13,13 @@
 	top: 0;
 }
 
-#city-view
+#header
 {
-	height: 100%;
+	text-align: center;
+	height: 100px;
 }
 
-#content
+#city-view
 {
 	height: 100%;
 }
@@ -28,18 +29,33 @@
 	height: 100%;
 }
 
-#title.small
+#title
 {
-	width: 100px;
+	z-index: 1000;
+	position: relative;
+	top: 0;
 }
 
-#title.small img
+#title img
 {
-	width: 120px;
+	width: 80px;
 }
 
 .angular-google-map-container
 {
 	width: 100%;
 	height: 500px;
+}
+
+#content
+{
+	height: 100%;
+}
+
+#tab-content
+{
+	min-width: 410px;
+	max-width: 910px;
+	text-align: center;
+	margin: 0 auto;
 }
