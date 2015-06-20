@@ -1,9 +1,6 @@
 import requests
 import json
 
-URL_CITIES = 'http://localhost:5000/api/cities/'
-URL_TRUCKS = 'http://localhost:5000/api/trucks/'
-
 HEADER = {'Content-Type': 'application/json'}
 
 CITIES_DATA = [
@@ -18,31 +15,35 @@ CITIES_DATA = [
 ]
 
 TRUCKS_DATA = [
-	{
-		'name': 'FoodTruck do Ramon',
-		'geoposition': {
-			'latitude': -29.684372,
-			'longitude': -51.125899,
-			'accuracy': 14
+	[
+		{
+			'name': 'FoodTruck do Ramon',
+			'geoposition': {
+				'latitude': -29.684372,
+				'longitude': -51.125899,
+				'accuracy': 14
+			}
 		}
-	}
-	,
-	{
-		'name': 'FoodTruck do Breno',
-		'geoposition': {
-			'latitude': -29.680923,
-			'longitude': -51.135877,
-			'accuracy': 14
+		,
+		{
+			'name': 'FoodTruck do Breno',
+			'geoposition': {
+				'latitude': -29.680923,
+				'longitude': -51.135877,
+				'accuracy': 14
+			}
 		}
-	}
+	]
 ]
 
 def fill():
-	for c in CITIES_DATA:
-		r = requests.post(URL_CITIES, data=json.dumps(c), headers=HEADER)
-		print('CITIES: {0}'.format(r.text))
+	for city, trucks in zip(CITIES_DATA, TRUCKS_DATA):
+		response = requests.post('http://localhost:5000/api/cities/', data=json.dumps(city), headers=HEADER)
+		response = json.loads(response.text)
+		city_id = response['id']
+		print('City {0}: {1}'.format(city_id, response['name']))
 
-	for t in TRUCKS_DATA:
-		r = requests.post(URL_TRUCKS, data=json.dumps(t), headers=HEADER)
-		print('Trucks: {0}'.format(r.text))
-
+		for truck in trucks:
+			response = requests.post('http://localhost:5000/api/cities/{0}/trucks/'.format(city_id), data=json.dumps(truck), headers=HEADER)
+			response = json.loads(response.text)
+			print('.. Truck {0}: {1}'.format(response['id'], response['name']))

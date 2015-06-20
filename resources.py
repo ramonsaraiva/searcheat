@@ -34,10 +34,14 @@ class Trucks(Resource):
 		self.reqparse.add_argument('name', type=str, location='json', required=True)
 		self.reqparse.add_argument('geoposition', type=dict, location='json', required=True)
 
-	def post(self):
+	def post(self, id):
 		args = self.reqparse.parse_args()
+
+		city = City.query.get_or_404(id)
+
 		truck = Truck()
 		truck.create(args)
+		city.trucks.append(truck)
 
 		db.session.add(truck)
 		db.session.commit()
