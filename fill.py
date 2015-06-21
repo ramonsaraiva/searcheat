@@ -9,7 +9,7 @@ CITIES_DATA = [
 		'geoposition': {
 			'latitude': -29.6905404,
 			'longitude': -51.1161786,
-			'accuracy': 14
+			'accuracy': 8
 		}
 	}
 ]
@@ -21,7 +21,7 @@ TRUCKS_DATA = [
 			'geoposition': {
 				'latitude': -29.684372,
 				'longitude': -51.125899,
-				'accuracy': 14
+				'accuracy': 8
 			}
 		}
 		,
@@ -30,7 +30,7 @@ TRUCKS_DATA = [
 			'geoposition': {
 				'latitude': -29.680923,
 				'longitude': -51.135877,
-				'accuracy': 14
+				'accuracy': 8
 			}
 		}
 	]

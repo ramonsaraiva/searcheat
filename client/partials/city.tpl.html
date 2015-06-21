@@ -1,54 +1,50 @@
 <link rel="stylesheet" href="css/city.css">
 
-<div id="city-view" ng-controller="city_controller">
+<div id="city-view" class="full-height" ng-controller="city_controller">
 	<div id="header">
 		<div id="top-padding">
 		</div>
 		<div id="title">
-			<img src="img/searcheat_circle.png" />
+			<a ng-href="#/"><img src="img/searcheat_circle.png" /></a>
 		</div>
 	</div>
 
-	<div id="content" class="row">
-		<div id="tab-menu" class="col-xs-7">
-			<div class="row">
-				<div class="col-lg-3 col-lg-offset-9 col-xs-8 col-xs-offset-4">
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="">
-							<a data-target="#map-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
-						</li>
-						<li role="presentation" class="">
-							<a data-target="#list-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
-						</li>
-						<li role="presentation" class="">
-							<a data-target="#envelope-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
-						</li>
-					</ul>
-				</div>
+	<div class="row full-height no-header text-center">
+		<div class="full-height col-lg-8 col-md-8 col-sm-10 col-xs-offset-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
+			<div id="city-name">
+				<h1 ng-cloak>FOODTRUCKS EM {{ city.name }}</h1>
 			</div>
+			<ul class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active">
+					<a data-target="#map-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
+				</li>
+				<li role="presentation" class="">
+					<a data-target="#list-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
+				</li>
+				<li role="presentation" class="">
+					<a data-target="#envelope-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+				</li>
+			</ul>
 
-			<!-- acho que eu fiz uma cagada aqui -->
-			<div class="row">
-				<div class="tab-content">
-					<!-- MAP TAB -->
-					<div id="map-tab" class="tab-pane">
-						<div id="map-canvas">
-							<ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" options="options" draggable="true">
-							<ui-gmap-markers models="trucks" coords="'self'"></ui-gmap-markers>
-							</ui-gmap-google-map>
-						</div>
+			<div class="full-height tab tab-content">
+				<!-- MAP TAB -->
+				<div id="map-tab" class="full-height tab-pane active">
+					<div id="map-canvas" class="full-height">
+						<ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" options="options" draggable="false">
+						<ui-gmap-markers models="city.trucks" coords="'geoposition'"></ui-gmap-markers>
+						</ui-gmap-google-map>
 					</div>
-					<!-- END OF MAP TAB -->
+				</div>
+				<!-- END OF MAP TAB -->
 
-					<!-- LIST TAB -->
-					<div id="list-tab" class="tab-pane">
-						<h1>LIST-TAB</h1>
-					</div>
-					<!-- END OF LIST TAB -->
+				<!-- LIST TAB -->
+				<div id="list-tab" class="full-height tab-pane">
+					<h1>LIST-TAB</h1>
+				</div>
+				<!-- END OF LIST TAB -->
 
-					<div id="envelope-tab" class="tab-pane">
-						<h1>fegreh</h1>
-					</div>
+				<div id="envelope-tab" class="full-height tab-pane">
+					<h1>fegreh</h1>
 				</div>
 			</div>
 

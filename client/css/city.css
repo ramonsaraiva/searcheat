@@ -4,8 +4,8 @@
 
 #top-padding
 {
-	background-color: red;
-	height: 38px;
+	background-color: #FFF;
+	height: 16px;
 	min-width: 410px;
 	width: 100%;
 	position: absolute;
@@ -13,43 +13,16 @@
 	top: 0;
 }
 
-#header
-{
-	text-align: center;
-	height: 100px;
-}
-
-#city-view
-{
-	height: 100%;
-}
-
-#tab-menu
-{
-	height: 100%;
-}
-
-#title
-{
-	z-index: 1000;
-	position: relative;
-	top: 0;
-}
-
 #title img
 {
-	width: 80px;
+	width: 120px;
 }
 
 .angular-google-map-container
 {
 	width: 100%;
+	min-height: 500px;
 	height: 500px;
-}
-
-#content
-{
-	height: 100%;
 }
 
 #tab-content
@@ -58,4 +31,11 @@
 	max-width: 910px;
 	text-align: center;
 	margin: 0 auto;
+}
+
+#city-name
+{
+	margin-top: 40px;
+	margin-bottom: 20px;
+	background: rgba(0, 0, 0, 0.4);
 }

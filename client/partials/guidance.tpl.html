@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/guidance.css">
 
-<div id="guidance-view" ng-controller="guidance_controller">
+<div id="view" class="full-height" ng-controller="guidance_controller">
 <div id="header">
 	<div id="top-padding">
 	</div>
@@ -10,8 +10,8 @@
 </div>
 <div id="search-box-container" class="row text-center">
 	<div id="search-box" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-sm-offset-3">
+		<h1>Selecione a cidade</h1>
 		<div class="form-group">
-			<label>Selecione a cidade</label>
 			<select ng-model="city" convert-to-number ng-options="city.id as city.name for city in data" class="form-control text-center">
 			</select>
 		</div>

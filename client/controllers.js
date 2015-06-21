@@ -44,21 +44,12 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 				latitude: $scope.city.geoposition.latitude,
 				longitude: $scope.city.geoposition.longitude
 			},
-			zoom: 8
+			zoom: 14
 		};
 
 		$scope.options = {
 			scrollwheel: false
 		};
-
-		$scope.trucks = [
-			{
-				id: 0,
-				latitude: 40.1451,
-				longitude: -99.6680,
-				title: 'igualop'
-			}
-		];
 	};
 
 	/*

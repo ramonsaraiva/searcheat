@@ -20,10 +20,66 @@ body
 h1, h2, h3, h4, h5, h6, label
 {
 	font-family: 'brain-flower';
-	font-size: 2.2em;
+	color: #FFF;
+	font-weight: bold;
+}
+
+h1 { font-size: 3.8em; }
+h2 { font-size: 3em; }
+h3 { font-size: 2.6em; }
+h4 { font-size: 2.4em; }
+h5 { font-size: 2.2em; }
+h6 { font-size: 2em; }
+
+ul 
+{
+	margin: 0;
+}
+
+.row
+{
+   margin-left: 0;
+   margin-right: 0;
+}
+
+.container-fluid
+{
+	padding: 0px;
+}
+
+#header
+{
+	text-align: center;
+	height: 100px;
+}
+
+
+#title
+{
+	z-index: 1000;
+	position: relative;
+	top: 0;
 }
 
 #view
 {
+	max-width: 910px;
+	min-width: 410px;
+	margin: 0 auto;
+}
+
+.full-height
+{
 	height: 100%;
+	overflow-y: hidden;
+}
+
+.full-height.no-header
+{
+	height: calc(100% - 100px);
+}
+
+.full-height.tab
+{
+	height: calc(100% - 60px);
 }
