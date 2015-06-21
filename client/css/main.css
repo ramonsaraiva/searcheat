@@ -21,7 +21,6 @@ h1, h2, h3, h4, h5, h6, label
 {
 	font-family: 'brain-flower';
 	color: #FFF;
-	font-weight: bold;
 }
 
 h1 { font-size: 3.8em; }
@@ -71,15 +70,16 @@ ul
 .full-height
 {
 	height: 100%;
-	overflow-y: hidden;
+	/* overflow-y: hidden; */
 }
 
 .full-height.no-header
 {
 	height: calc(100% - 100px);
+	/*overflow-y: hidden;*/
 }
 
 .full-height.tab
 {
-	height: calc(100% - 60px);
+	height: calc(100% - 156px);
 }

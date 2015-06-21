@@ -6,19 +6,13 @@
 
 #top-padding
 {
-	background-color: red;
-	height: 100px;
+	background-color: #FFF;
+	height: 60px;
 	min-width: 410px;
 	width: 100%;
 	position: absolute;
 	left: 0;
 	top: 0;
-}
-
-#header
-{
-	text-align: center;
-	height: 100px;
 }
 
 #title img

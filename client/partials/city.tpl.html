@@ -12,16 +12,16 @@
 	<div class="row full-height no-header text-center">
 		<div class="full-height col-lg-8 col-md-8 col-sm-10 col-xs-offset-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
 			<div id="city-name">
-				<h1 ng-cloak>FOODTRUCKS EM {{ city.name }}</h1>
+				<h1 ng-cloak>FOODTRUCKS EM <strong>{{ city.name }}</strong></h1>
 			</div>
 			<ul class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active">
+				<li role="presentation" class="active col-xs-4">
 					<a data-target="#map-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
 				</li>
-				<li role="presentation" class="">
+				<li role="presentation" class="col-xs-4">
 					<a data-target="#list-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
 				</li>
-				<li role="presentation" class="">
+				<li role="presentation" class="col-xs-4">
 					<a data-target="#envelope-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
 				</li>
 			</ul>
@@ -30,7 +30,7 @@
 				<!-- MAP TAB -->
 				<div id="map-tab" class="full-height tab-pane active">
 					<div id="map-canvas" class="full-height">
-						<ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" options="options" draggable="false">
+						<ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" options="options">
 						<ui-gmap-markers models="city.trucks" coords="'geoposition'"></ui-gmap-markers>
 						</ui-gmap-google-map>
 					</div>

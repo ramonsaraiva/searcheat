@@ -48,7 +48,8 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 		};
 
 		$scope.options = {
-			scrollwheel: false
+			scrollwheel: false,
+			draggable: true
 		};
 	};
 
