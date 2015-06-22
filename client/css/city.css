@@ -63,6 +63,12 @@
 	color: red;
 }
 
+/* eh soh isso mesmo pra funcionar a scrollbar? lol */
+#list-tab
+{
+	overflow: auto;
+}
+
 .list-row
 {
 	padding: 10px;

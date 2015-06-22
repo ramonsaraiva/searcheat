@@ -11,7 +11,7 @@ TRUCKS_DATA = [
 			'longitude': -51.125899,
 			'accuracy': 8
 		},
-		'icon': 'aaaaaaaaaaa.jpg'
+		'icon': 'ramon_foodtruck.jpg'
 	}
 	,
 	{
@@ -21,7 +21,25 @@ TRUCKS_DATA = [
 			'longitude': -51.135877,
 			'accuracy': 8
 		},
-		'icon': 'aaaaaaaaa.jpg'
+		'icon': 'breno_foodtruck.jpg'
+	},
+	{
+		'name': 'CauCakes',
+		'geoposition': {
+			'latitude': -29.6802572,
+			'longitude': -51.1169033,
+			'accuracy': 8
+		},
+		'icon': 'caucakes.jpg'
+	},
+	{
+		'name': 'Jackie & Jack',
+		'geoposition': {
+			'latitude': -29.6804343,
+			'longitude': -51.1170536,
+			'accuracy': 8
+		},
+		'icon': 'jackie_and_jack.jpg'
 	}
 ]
 
