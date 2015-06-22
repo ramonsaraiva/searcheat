@@ -23,17 +23,30 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 
 controllers.controller('city_controller', ['$scope', '$routeParams', '$location', 'db', function($scope, $routeParams, $location, db) {
 	$scope.db = new db('cities');
-	$scope.city = {}
+	$scope.city = {};
 
 	$scope.db.read($routeParams.id)
 		.success(function(data) {
 			$scope.city = data;
+			$scope.fix_trucks($scope.city.trucks)
 			$scope.map_init();
 			console.log($scope.city);
 		})
 		.error(function(e) {
 			$scope.city = null;
 		});
+
+	$scope.fix_trucks = function(trucks)
+	{
+		for(var i in trucks)
+		{
+			trucks[i].title = trucks[i].name;
+			trucks[i].icon_url = '/icons/' + trucks[i].icon;
+			console.log(trucks[i])
+		}
+
+		return trucks;
+	};
 
 	$scope.map_init = function()
 	{
