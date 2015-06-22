@@ -44,7 +44,21 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 				latitude: $scope.city.geoposition.latitude,
 				longitude: $scope.city.geoposition.longitude
 			},
-			zoom: 14
+			zoom: 14,
+			events: {
+				tilesloaded: function(map) {
+						console.log('tilesloaded2323123');
+					$scope.$apply(function() {
+						console.log('tilesloaded');
+						google.maps.event.trigger(map, 'resize');
+					});
+				},
+				bounds_changed: function() {
+					console.log('vai se foder');
+					var gmap = $scope.map.control.getGMap();
+					google.maps.event.trigger(gmap, 'resize');
+				}
+			}
 		};
 
 		$scope.options = {
@@ -52,6 +66,13 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 			draggable: true
 		};
 	};
+
+	$scope.map_resize = function()
+	{
+		var gmap = $scope.map.control.getGMap();
+		google.maps.event.trigger(gmap, 'resize');
+
+	}
 
 	/*
 	$scope.marker = {
