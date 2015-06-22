@@ -41,6 +41,11 @@ class Trucks(Resource):
 	def post(self, id):
 		args = self.reqparse.parse_args()
 
+		# depois de parsear a request,
+		# usar o pygeocoder pra pegar a cidade
+		# pela lat + long..
+		# fazer uma query no db procurando pelo nome dessa cidade
+		# se existir, usa a cidade, se nao existir, cria
 		city = City.query.get_or_404(id)
 
 		truck = Truck()
