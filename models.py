@@ -68,7 +68,7 @@ class Truck(db.Model):
 			'name': self.name,
 			'geoposition': self.geoposition.serialize,
 			'icon': self.icon,
-			'icon_url': '{0}/{1}'.format('/icons/', self.icon)
+			'icon_url': '{0}{1}'.format('/icons/', self.icon)
 		}
 
 	def create(self, data):
