@@ -35,8 +35,16 @@
 						<ui-gmap-markers models="city.trucks" coords="'geoposition'" icon="'icon_obj'" events="markers_events" fit="true">
 
 							<ui-gmap-windows>
-								<div style="color: black;" ng-non-bindable>
-									<p>{{name}}</p>
+								<div  class="marker-popup" ng-non-bindable>
+									<div class="row vertical-align">
+										<div class="col-xs-4">
+											<img src="{{ icon_url }}" class="img-responsive img-circle" /></a>
+										</div>
+										<div class="col-xs-8">
+											<p>{{name}}</p>
+											<p><small>Última alteração de posição: </small></p>
+										</div>
+									</div>
 								</div>
 							</ui-gmap-windows>
 

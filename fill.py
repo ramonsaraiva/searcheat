@@ -40,6 +40,15 @@ TRUCKS_DATA = [
 			'accuracy': 8
 		},
 		'icon': 'jackie_and_jack.jpg'
+	},
+	{
+		'name': 'FoodTruck da Lu',
+		'geoposition': {
+			'latitude': -29.676594,
+			'longitude': -51.061647,
+			'accuracy': 8
+		},
+		'icon': 'lu.jpg'
 	}
 ]
 

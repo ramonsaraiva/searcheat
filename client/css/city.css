@@ -29,6 +29,19 @@
 	height: 100%;
 }
 
+.marker-popup
+{
+	color: black;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+.marker-popup img
+{
+	width: 64px;
+	height: 64px;
+}
+
 #tab-content
 {
 	min-width: 410px;
