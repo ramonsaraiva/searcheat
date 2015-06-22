@@ -23,6 +23,7 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 
 controllers.controller('city_controller', ['$scope', '$routeParams', '$location', 'db', function($scope, $routeParams, $location, db) {
 	$scope.db = new db('cities');
+	$scope.trucks_db = new db('trucks')
 	$scope.city = {};
 
 	$scope.db.read($routeParams.id)
@@ -77,6 +78,30 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 		var gmap = $scope.map.control.getGMap();
 		google.maps.event.trigger(gmap, 'resize');
 	}
+
+	$scope.detailed = function(id)
+	{
+		$scope.trucks_db.read(id)
+			.success(function(data) {
+				$scope.truck = data;
+				console.log(data);
+				jQuery('[data-target="#detailed-tab"]').click();
+			})
+			.error(function(e) {
+				console.log(e);
+			});
+	};
+
+	/*
+	 * se o cara aperta na detailed tab sem selecionar nenhum truck..
+	 * retorna pra tab da lista :)
+	 */
+	jQuery('[data-target="#detailed-tab"]').on('shown.bs.tab', function(e) {
+		if (!$scope.truck)
+		{
+			jQuery('[data-target="#list-tab"]').click();
+		}
+	});
 
 	/*
 	$scope.marker = {

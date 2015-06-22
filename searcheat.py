@@ -20,7 +20,7 @@ api = Api(app)
 
 # resources
 api.add_resource(Cities, '/api/cities/', '/api/cities/<int:id>/')
-api.add_resource(Trucks, '/api/cities/<int:id>/trucks/', '/api/trucks/<int:id>/')
+api.add_resource(Trucks, '/api/trucks/', '/api/trucks/<int:id>/')
 
 @app.route('/')
 def index():

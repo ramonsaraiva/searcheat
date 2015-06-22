@@ -22,7 +22,7 @@
 					<a data-target="#list-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
 				</li>
 				<li role="presentation" class="col-xs-4">
-					<a data-target="#envelope-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
+					<a data-target="#detailed-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
 				</li>
 			</ul>
 
@@ -39,7 +39,7 @@
 
 				<!-- LIST TAB -->
 				<div id="list-tab" class="full-height tab-pane text-left">
-					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks">
+					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-click="detailed(truck.id)">
 						<div class="col-xs-2">
 							<img ng-src="{{truck.icon_url}}" class="img-responsive img-circle" style="min-height:100px; max-width:100px;"/>
 						</div>
@@ -47,7 +47,7 @@
 							<h2><strong>{{ truck.name }}</strong></h2>
 							<p>{{ truck.address }}</p>
 						</div>
-						<div class="col-xs-3">
+						<div class="col-xs-3 text-center">
 							<p>
 								<span class="glyphicon glyphicon-ice-lolly" aria-hidden="true"></span>
 								<span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
@@ -60,7 +60,29 @@
 				</div>
 				<!-- END OF LIST TAB -->
 
-				<div id="envelope-tab" class="full-height tab-pane">
+				<div id="detailed-tab" class="full-height tab-pane">
+					<div class="row">
+						<div class="col-xs-12">
+							<div id="detailed-name" class="row vertical-align">
+								<div class="col-xs-2 text-center">
+									<img ng-src="{{ truck.icon_url }}" class="img-responsive img-circle" style="min-height: 100px; max-width: 100px;" />
+								</div>
+								<div class="col-xs-4 text-left">
+									<h2><strong>{{ truck.name }}</strong></h2>
+									<p>{{ truck.address }}</p>
+								</div>
+								<div class="col-xs-2 text-center">
+									<p>
+										<span class="glyphicon glyphicon-ice-lolly" aria-hidden="true"></span>
+										<span class="glyphicon glyphicon-ice-lolly-tasted" aria-hidden="true"></span>
+									</p>
+								</div>
+								<div class="col-xs-2 text-center">
+									<p><strong>Distância: 300m</strong></p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 

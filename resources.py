@@ -3,6 +3,8 @@ from flask import request
 from flask.ext.restful import Resource
 from flask.ext.restful import reqparse
 
+from pygeocoder import Geocoder as geo
+
 from models import db
 from models import City
 from models import Truck
@@ -13,7 +15,6 @@ def get_format(f):
 class Cities(Resource):
 	def __init__(self):
 		self.reqparse = reqparse.RequestParser()
-		self.reqparse.add_argument('name', type=str, location='json', required=True)
 		self.reqparse.add_argument('geoposition', type=dict, location='json', required=True)
 
 	def post(self):
@@ -38,21 +39,20 @@ class Trucks(Resource):
 		self.reqparse.add_argument('geoposition', type=dict, location='json', required=True)
 		self.reqparse.add_argument('icon', type=str, location='json', required=False)
 
-	def post(self, id):
+	def post(self):
 		args = self.reqparse.parse_args()
 
-		# depois de parsear a request,
-		# usar o pygeocoder pra pegar a cidade
-		# pela lat + long..
-		# fazer uma query no db procurando pelo nome dessa cidade
-		# se existir, usa a cidade, se nao existir, cria
-		city = City.query.get_or_404(id)
+		geo_data = geo.reverse_geocode(args['geoposition']['latitude'], args['geoposition']['longitude'])
+		city = db.session.query(City).filter(City.name==geo_data.city).first()
+		if not city:
+			city = City()
+			city.create(geo_data)
 
 		truck = Truck()
 		truck.create(args)
 		city.trucks.append(truck)
 
-		db.session.add(truck)
+		db.session.add(city)
 		db.session.commit()
 
 		if args['icon']:
@@ -60,7 +60,6 @@ class Trucks(Resource):
 			truck.icon = icon
 
 		db.session.commit()
-
 		return truck.serialize
 
 	def get(self, id=None):

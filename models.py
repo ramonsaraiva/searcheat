@@ -44,12 +44,12 @@ class City(db.Model):
 	def serialize_trucks(self):
 		return [t.serialize for t in self.trucks]
 
-	def create(self, data):
-		self.name = data['name']
+	def create(self, geo_data):
+		self.name = geo_data.city
 		self.geoposition = Geoposition()
-		self.geoposition.latitude = data['geoposition']['latitude']
-		self.geoposition.longitude = data['geoposition']['longitude']
-		self.geoposition.accuracy = data['geoposition']['accuracy']
+		self.geoposition.latitude = geo_data.latitude
+		self.geoposition.longitude = geo_data.longitude
+		self.geoposition.accuracy = 14
 
 class Truck(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
