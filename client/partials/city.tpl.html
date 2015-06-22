@@ -41,7 +41,7 @@
 				<div id="list-tab" class="full-height tab-pane text-left">
 					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks">
 						<div class="col-xs-2">
-							<img ng-src="/icons/{{truck.icon}}" class="img-responsive img-circle" style="min-height:100px; max-width:100px;"/>
+							<img ng-src="{{truck.icon_url}}" class="img-responsive img-circle" style="min-height:100px; max-width:100px;"/>
 						</div>
 						<div class="col-xs-4">
 							<h2><strong>{{ truck.name }}</strong></h2>
