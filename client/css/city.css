@@ -48,19 +48,21 @@
 {
 	color: #FFF;
 	font-size: 2.2em;
+	background-color: rgba(255, 255, 255, 0.05);
+	border-color: rgba(255, 255, 255, 0.05);
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
 {
 	background-color: #FFF;
-	color: red;
+	color: #D43F3A;
 	font-weight: bold;
 }
 .nav-tabs > li > a:hover
 {
 	background-color: rgba(255, 255, 255, 0.1);
 	border-color: rgba(255, 255, 255, 0.1);
-	color: red;
+	color: #D9534F;
 }
 
 /* eh soh isso mesmo pra funcionar a scrollbar? lol */

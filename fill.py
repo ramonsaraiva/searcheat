@@ -27,7 +27,7 @@ TRUCKS_DATA = [
 		'name': 'CauCakes',
 		'geoposition': {
 			'latitude': -29.6802572,
-			'longitude': -51.1169033,
+			'longitude': -51.1009033,
 			'accuracy': 8
 		},
 		'icon': 'caucakes.jpg'
