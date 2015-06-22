@@ -1,4 +1,5 @@
 from flask.ext.sqlalchemy import SQLAlchemy
+from pygeocoder import Geocoder as geo
 
 db = SQLAlchemy()
 
@@ -56,6 +57,7 @@ class Truck(db.Model):
 	city_id = db.Column(db.Integer, db.ForeignKey('city.id', ondelete='CASCADE'), nullable=False)
 	geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)
 	geoposition = db.relationship('Geoposition', backref=db.backref('truck', uselist=False))
+	address = db.Column(db.String(128))
 	icon = db.Column(db.String(64))
 
 	def __repr__(self):
@@ -67,6 +69,7 @@ class Truck(db.Model):
 			'id': self.id,
 			'name': self.name,
 			'geoposition': self.geoposition.serialize,
+			'address': self.address,
 			'icon': self.icon,
 			'icon_url': '{0}{1}'.format('/icons/', self.icon)
 		}
@@ -77,3 +80,6 @@ class Truck(db.Model):
 		self.geoposition.latitude = data['geoposition']['latitude']
 		self.geoposition.longitude = data['geoposition']['longitude']
 		self.geoposition.accuracy = data['geoposition']['accuracy']
+
+		self.address = geo.reverse_geocode(self.geoposition.latitude,
+												self.geoposition.longitude).formatted_address
