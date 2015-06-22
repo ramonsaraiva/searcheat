@@ -10,12 +10,14 @@
 </div>
 <div id="search-box-container" class="row text-center">
 	<div id="search-box" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-sm-offset-3">
-		<h1>Selecione a cidade</h1>
+		<h1><strong>Selecione a cidade</strong></h1>
+		<hr/>
 		<div class="form-group">
 			<select ng-model="city" convert-to-number ng-options="city.id as city.name for city in data" class="form-control text-center">
 			</select>
 		</div>
 		<button ng-click="search()" class="btn btn-danger form-control"><strong>Procurar</strong></button>
+			<p class="help-block"><strong>* Ative sua geolocalização para resultados mais precisos</strong></p>
 	</div>
 </div>
 </div>

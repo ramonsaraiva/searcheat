@@ -47,6 +47,21 @@ ul
 	padding: 0px;
 }
 
+.help-block
+{
+	color: #FFF;
+}
+
+select
+{
+	font-weight: bold;
+}
+
+option
+{
+	font-weight: bold;
+}
+
 #header
 {
 	text-align: center;

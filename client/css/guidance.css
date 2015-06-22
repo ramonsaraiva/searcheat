@@ -7,7 +7,7 @@
 #top-padding
 {
 	background-color: #FFF;
-	height: 60px;
+	height: 40px;
 	min-width: 410px;
 	width: 100%;
 	position: absolute;
@@ -17,7 +17,7 @@
 
 #title img
 {
-	width: 250px;
+	width: 280px;
 }
 
 #search-box
@@ -29,5 +29,5 @@
 
 #search-box-container
 {
-	margin-top: 180px;
+	margin-top: 210px;
 }
