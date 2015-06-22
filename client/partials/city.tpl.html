@@ -38,13 +38,26 @@
 				<!-- END OF MAP TAB -->
 
 				<!-- LIST TAB -->
-				<div id="list-tab" class="full-height tab-pane">
-					<h1>LIST-TAB</h1>
+				<div id="list-tab" class="full-height tab-pane text-left">
+					<div class="row vertical-align" ng-repeat="truck in city.trucks">
+						<div class="col-xs-2 vcenter">
+							<img src="img/searcheat_circle.png" class="img img-responsive img-rounded" style="max-width: 100px;"/>
+						</div>
+						<div class="col-xs-4">
+							<h2><strong>{{ truck.name }}</strong></h2>
+						</div>
+						<div class="col-xs-3">
+							<p>{{ truck.geoposition.latitude }}</p>
+							<p>{{ truck.geoposition.longitude }}</p>
+						</div>
+						<div class="col-xs-3">
+							<button class="btn btn-default">+</button>
+						</div>
+					</div>
 				</div>
 				<!-- END OF LIST TAB -->
 
 				<div id="envelope-tab" class="full-height tab-pane">
-					<h1>fegreh</h1>
 				</div>
 			</div>
 

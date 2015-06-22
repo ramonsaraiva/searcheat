@@ -15,6 +15,7 @@ body
 	background-repeat: no-repeat;
 	background-image: url('/img/street-food.jpg');
 	background-attachment: fixed;
+	color: #FFF;
 }
 
 h1, h2, h3, h4, h5, h6, label
@@ -81,5 +82,12 @@ ul
 
 .full-height.tab
 {
-	height: calc(100% - 156px);
+	background: rgba(0, 0, 0, 0.4);
+	height: calc(100% - 165px);
+}
+
+.vertical-align
+{
+	display: flex;
+	align-items: center;
 }
