@@ -28,6 +28,14 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	$scope.db.read($routeParams.id)
 		.success(function(data) {
 			$scope.city = data;
+
+			for(var i in $scope.city.trucks)
+			{
+				$scope.city.trucks[i].icon_obj = {
+					url: $scope.city.trucks[i].icon_url,
+					scaledSize: {height: 30, width: 30}
+				};
+			}
 			$scope.map_init();
 			console.log($scope.city);
 		})
@@ -47,14 +55,11 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 			zoom: 14,
 			events: {
 				tilesloaded: function(map) {
-						console.log('tilesloaded2323123');
 					$scope.$apply(function() {
-						console.log('tilesloaded');
 						google.maps.event.trigger(map, 'resize');
 					});
 				},
 				bounds_changed: function() {
-					console.log('vai se foder');
 					var gmap = $scope.map.control.getGMap();
 					google.maps.event.trigger(gmap, 'resize');
 				}
@@ -71,7 +76,6 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	{
 		var gmap = $scope.map.control.getGMap();
 		google.maps.event.trigger(gmap, 'resize');
-
 	}
 
 	/*
