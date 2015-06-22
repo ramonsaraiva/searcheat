@@ -22,7 +22,8 @@ TRUCKS_DATA = [
 				'latitude': -29.684372,
 				'longitude': -51.125899,
 				'accuracy': 8
-			}
+			},
+			'icon': 'aaaaaaaaaaa.jpg'
 		}
 		,
 		{
@@ -31,7 +32,8 @@ TRUCKS_DATA = [
 				'latitude': -29.680923,
 				'longitude': -51.135877,
 				'accuracy': 8
-			}
+			},
+			'icon': 'aaaaaaaaa.jpg'
 		}
 	]
 ]

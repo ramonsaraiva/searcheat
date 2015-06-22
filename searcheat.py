@@ -26,6 +26,10 @@ api.add_resource(Trucks, '/api/cities/<int:id>/trucks/', '/api/trucks/<int:id>/'
 def index():
 	return send_from_directory('client', 'main.html')
 
+@app.route('/data/<path:path>')
+def _icon(path):
+	return send_from_directory('data', path)
+
 @app.route('/<path:path>')
 def _static(path):
 	return send_from_directory('client', path)

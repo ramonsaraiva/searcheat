@@ -56,6 +56,7 @@ class Truck(db.Model):
 	city_id = db.Column(db.Integer, db.ForeignKey('city.id', ondelete='CASCADE'), nullable=False)
 	geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)
 	geoposition = db.relationship('Geoposition', backref=db.backref('truck', uselist=False))
+	icon = db.Column(db.String(64))
 
 	def __repr__(self):
 		return '<Truck {0}:{1}>'.format(self.id, self.name)
@@ -65,7 +66,8 @@ class Truck(db.Model):
 		return {
 			'id': self.id,
 			'name': self.name,
-			'geoposition': self.geoposition.serialize
+			'geoposition': self.geoposition.serialize,
+			'icon': self.icon
 		}
 
 	def create(self, data):

@@ -7,6 +7,9 @@ from models import db
 from models import City
 from models import Truck
 
+def get_format(f):
+	return f.split('.')[1]
+
 class Cities(Resource):
 	def __init__(self):
 		self.reqparse = reqparse.RequestParser()
@@ -33,6 +36,7 @@ class Trucks(Resource):
 		self.reqparse = reqparse.RequestParser()
 		self.reqparse.add_argument('name', type=str, location='json', required=True)
 		self.reqparse.add_argument('geoposition', type=dict, location='json', required=True)
+		self.reqparse.add_argument('icon', type=str, location='json', required=False)
 
 	def post(self, id):
 		args = self.reqparse.parse_args()
@@ -45,6 +49,13 @@ class Trucks(Resource):
 
 		db.session.add(truck)
 		db.session.commit()
+
+		if args['icon']:
+			icon = '{0}.{1}'.format(truck.id, get_format(args['icon']))
+			truck.icon = icon
+
+		db.session.commit()
+
 		return truck.serialize
 
 	def get(self, id=None):
