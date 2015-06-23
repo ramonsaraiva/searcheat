@@ -3,8 +3,7 @@
 var app = angular.module('searcheat', [
 	'ngRoute',
 	'controllers',
-	'services',
-	'uiGmapgoogle-maps'
+	'services'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
