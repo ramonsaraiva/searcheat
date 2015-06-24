@@ -13,6 +13,11 @@
 	top: 0;
 }
 
+#title
+{
+	padding-top: 15px;
+}
+
 #title img
 {
 	width: 120px;

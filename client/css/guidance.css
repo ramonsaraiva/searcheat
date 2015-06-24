@@ -6,13 +6,14 @@
 
 #top-padding
 {
-	background-color: #FFF;
-	height: 40px;
+	/* background-color: #FFF; */
+	height: 30px;
 	min-width: 410px;
 	width: 100%;
 	position: absolute;
 	left: 0;
 	top: 0;
+	background: #FFF url('/img/bar.png') repeat-x;
 }
 
 #title img
@@ -29,5 +30,5 @@
 
 #search-box-container
 {
-	margin-top: 210px;
+	margin-top: 240px;
 }
