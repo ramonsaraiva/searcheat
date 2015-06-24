@@ -29,7 +29,7 @@ class Cities(Resource):
 	def get(self, id=None):
 		if id:
 			return City.query.get_or_404(id).serialize
-		cities = [c.serialize for c in City.query.order_by(City.name).all()]
+		cities = [c.serialize_simple for c in City.query.order_by(City.name).all()]
 		return cities
 
 class Trucks(Resource):

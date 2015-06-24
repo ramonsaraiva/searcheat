@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask.ext.sqlalchemy import SQLAlchemy
 from pygeocoder import Geocoder as geo
 
@@ -28,8 +30,19 @@ class City(db.Model):
 	geoposition = db.relationship('Geoposition', backref=db.backref('city', uselist=False))
 	trucks = db.relationship('Truck', backref='city', lazy='dynamic', cascade='all, delete-orphan', order_by='Truck.name')
 
+	# dates
+	creation_date = db.Column(db.DateTime())
+
 	def __repr__(self):
 		return '<City {0}:{1}'.format(self.id, self.name)
+
+	@property
+	def serialize_simple(self):
+		return {
+			'id': self.id,
+			'name': self.name,
+			'geoposition': self.geoposition.serialize
+		}
 
 	@property
 	def serialize(self):
@@ -50,6 +63,7 @@ class City(db.Model):
 		self.geoposition.latitude = geo_data.latitude
 		self.geoposition.longitude = geo_data.longitude
 		self.geoposition.accuracy = 14
+		self.creation_date = datetime.now()
 
 class Truck(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -59,6 +73,10 @@ class Truck(db.Model):
 	geoposition = db.relationship('Geoposition', backref=db.backref('truck', uselist=False))
 	address = db.Column(db.String(128))
 	icon = db.Column(db.String(64))
+
+	# dates
+	creation_date = db.Column(db.DateTime(), nullable=False)
+	last_update = db.Column(db.DateTime(), nullable=False)
 
 	def __repr__(self):
 		return '<Truck {0}:{1}>'.format(self.id, self.name)
@@ -71,7 +89,8 @@ class Truck(db.Model):
 			'geoposition': self.geoposition.serialize,
 			'address': self.address,
 			'icon': self.icon,
-			'icon_url': '{0}{1}'.format('/icons/', self.icon)
+			'icon_url': '{0}{1}'.format('/icons/', self.icon),
+			'last_update': self.last_update.strftime('%d/%m/%Y')
 		}
 
 	def create(self, data):
@@ -83,3 +102,5 @@ class Truck(db.Model):
 
 		self.address = geo.reverse_geocode(self.geoposition.latitude,
 												self.geoposition.longitude).formatted_address
+		self.creation_date = datetime.now()
+		self.last_update = datetime.now()
