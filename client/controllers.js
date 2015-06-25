@@ -29,7 +29,16 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	$scope.map = null;
 	$scope.map_canvas = document.getElementById('map-canvas');
 
+	/*pode dar uma merda do caralho
+	google.maps.InfoWindow.prototype.isOpen = function() {
+		console.log(infoWindow);
+		var map = infoWindow.getMap();
+		return (map !== null && typeof map !== 'undefined');
+	}
+	*/
+
 	$scope.infowindow = new google.maps.InfoWindow();
+	$scope.open_marker = null;
 
 	$scope.db.read($routeParams.id)
 		.success(function(data) {
@@ -75,32 +84,46 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 			}
 		});
 
-		/*
+		//coisa mais ridicula e escrota da galaxia, puta merda
+		var content = '<div  class="marker-popup">'+
+			'<div class="row vertical-align">'+
+				'<div class="col-xs-4">'+
+					'<img src="' + opts.icon_url + '" class="img-responsive img-circle" /></a>'+
+				'</div>'+
+				'<div class="col-xs-8">'+
+					'<p>' + opts.name + '</p>'+
+					'<p><small>Última alteração de posição: {{ last_update }}</small></p>'+
+				'</div>'+
+			'</div>'+
+		'</div>';
+
+		var isOpen = function() {
+			var map = $scope.infowindow.getMap();
+			return (map !== null && typeof map !== 'undefined');
+		};
+
 		google.maps.event.addListener(marker, 'click', function() {
+			if(marker === $scope.open_marker)
+			{
+				$scope.open_marker = null;
+				$scope.infowindow.close();
+				return;
+			}
+
+			$scope.open_marker = marker;
+			$scope.infowindow.setContent(content);
 			$scope.infowindow.open($scope.map, this);
 		});
-		*/
 
+		/*
 		google.maps.event.addListener(marker, 'mouseover', function() {
-			//coisa mais ridicula e escrota da galaxia puta merda
-			var content = '<div  class="marker-popup">'+
-				'<div class="row vertical-align">'+
-					'<div class="col-xs-4">'+
-						'<img src="' + opts.icon_url + '" class="img-responsive img-circle" /></a>'+
-					'</div>'+
-					'<div class="col-xs-8">'+
-						'<p>' + opts.name + '</p>'+
-						'<p><small>Última alteração de posição: {{ last_update }}</small></p>'+
-					'</div>'+
-				'</div>'+
-			'</div>';
-
 			$scope.infowindow.setContent(content);
 			$scope.infowindow.open($scope.map, this);
 		});
 		google.maps.event.addListener(marker, 'mouseout', function() {
 			$scope.infowindow.close();
 		});
+		*/
 	}
 
 	$scope.map_resize = function()
