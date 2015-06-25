@@ -30,8 +30,22 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	$scope.map_canvas = document.getElementById('map-canvas');
 
 	$scope.infowindow = new google.maps.InfoWindow({
-		content: '<div style="color: black;"><p>MALDIÇAO</p></div>'
+		content: '<div style="color: black;"><p>{{title}}</p></div>'
 	});
+
+	/*
+		<div  class="marker-popup" ng-non-bindable>
+			<div class="row vertical-align">
+				<div class="col-xs-4">
+					<img src="{{ icon_url }}" class="img-responsive img-circle" /></a>
+				</div>
+				<div class="col-xs-8">
+					<p>{{name}}</p>
+					<p><small>Última alteração de posição: {{ last_update }}</small></p>
+				</div>
+			</div>
+		</div>
+	*/
 
 	$scope.db.read($routeParams.id)
 		.success(function(data) {
@@ -55,24 +69,31 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 		$scope.map = new google.maps.Map($scope.map_canvas, $scope.map_options);
 
 		google.maps.event.addListenerOnce($scope.map, 'tilesloaded', function() {
-			console.log('igualop');
+			//console.log('igualop');
 		});
 
-		var marker = new google.maps.Marker({
-			map: $scope.map,
-			position: new google.maps.LatLng($scope.city.geoposition.latitude, $scope.city.geoposition.longitude),
-			visible: true,
-			title: 'teste de title'
-		});
+		for(var i in $scope.city.trucks)
+		{
+			var truck = $scope.city.trucks[i];
 
-		google.maps.event.addListener(marker, 'mouseover', function() {
-			$scope.infowindow.open($scope.map, this);
-			console.log('over');
-		});
-		google.maps.event.addListener(marker, 'mouseout', function() {
-			$scope.infowindow.close();
-			console.log('out');
-		});
+			var marker = new google.maps.Marker({
+				map: $scope.map,
+				position: new google.maps.LatLng(truck.geoposition.latitude, truck.geoposition.longitude),
+				visible: true,
+				title: truck.name,
+				icon: {
+					url: truck.icon_url,
+					scaledSize: {width: 30, height: 30}
+				}
+			});
+
+			google.maps.event.addListener(marker, 'mouseover', function() {
+				$scope.infowindow.open($scope.map, this);
+			});
+			google.maps.event.addListener(marker, 'mouseout', function() {
+				$scope.infowindow.close();
+			});
+		}
 	};
 
 	$scope.map_resize = function()
