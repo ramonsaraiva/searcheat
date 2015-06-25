@@ -50,14 +50,14 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	$scope.db.read($routeParams.id)
 		.success(function(data) {
 			$scope.city = data;
-			$scope.map_init();
+			$scope.create_map();
 			console.log($scope.city);
 		})
 		.error(function(e) {
 			$scope.city = null;
 		});
 
-	$scope.map_init = function()
+	$scope.create_map = function()
 	{
 		/*var style = [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}];*/
 
@@ -74,27 +74,37 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 
 		for(var i in $scope.city.trucks)
 		{
-			var truck = $scope.city.trucks[i];
-
-			var marker = new google.maps.Marker({
-				map: $scope.map,
-				position: new google.maps.LatLng(truck.geoposition.latitude, truck.geoposition.longitude),
-				visible: true,
-				title: truck.name,
-				icon: {
-					url: truck.icon_url,
-					scaledSize: {width: 30, height: 30}
-				}
-			});
-
-			google.maps.event.addListener(marker, 'mouseover', function() {
-				$scope.infowindow.open($scope.map, this);
-			});
-			google.maps.event.addListener(marker, 'mouseout', function() {
-				$scope.infowindow.close();
-			});
+			$scope.create_marker($scope.city.trucks[i]);
 		}
 	};
+
+	$scope.create_marker = function(opts)
+	{
+		var marker = new google.maps.Marker({
+			title: opts.name,
+			map: $scope.map,
+			position: new google.maps.LatLng(opts.geoposition.latitude, opts.geoposition.longitude),
+			visible: true,
+			icon: {
+				url: opts.icon_url,
+				scaledSize: {width: 30, height: 30}
+			}
+		});
+
+		/*
+		google.maps.event.addListener(marker, 'click', function() {
+			$scope.infowindow.open($scope.map, this);
+		});
+		*/
+
+		google.maps.event.addListener(marker, 'mouseover', function() {
+			$scope.infowindow.setContent('<h1 style="color: black;">' + opts.name + '</h1>');
+			$scope.infowindow.open($scope.map, this);
+		});
+		google.maps.event.addListener(marker, 'mouseout', function() {
+			$scope.infowindow.close();
+		});
+	}
 
 	$scope.map_resize = function()
 	{
