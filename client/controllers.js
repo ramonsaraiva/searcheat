@@ -29,23 +29,7 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	$scope.map = null;
 	$scope.map_canvas = document.getElementById('map-canvas');
 
-	$scope.infowindow = new google.maps.InfoWindow({
-		content: '<div style="color: black;"><p>{{title}}</p></div>'
-	});
-
-	/*
-		<div  class="marker-popup" ng-non-bindable>
-			<div class="row vertical-align">
-				<div class="col-xs-4">
-					<img src="{{ icon_url }}" class="img-responsive img-circle" /></a>
-				</div>
-				<div class="col-xs-8">
-					<p>{{name}}</p>
-					<p><small>Última alteração de posição: {{ last_update }}</small></p>
-				</div>
-			</div>
-		</div>
-	*/
+	$scope.infowindow = new google.maps.InfoWindow();
 
 	$scope.db.read($routeParams.id)
 		.success(function(data) {
@@ -98,7 +82,20 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 		*/
 
 		google.maps.event.addListener(marker, 'mouseover', function() {
-			$scope.infowindow.setContent('<h1 style="color: black;">' + opts.name + '</h1>');
+			//coisa mais ridicula e escrota da galaxia puta merda
+			var content = '<div  class="marker-popup">'+
+				'<div class="row vertical-align">'+
+					'<div class="col-xs-4">'+
+						'<img src="' + opts.icon_url + '" class="img-responsive img-circle" /></a>'+
+					'</div>'+
+					'<div class="col-xs-8">'+
+						'<p>' + opts.name + '</p>'+
+						'<p><small>Última alteração de posição: {{ last_update }}</small></p>'+
+					'</div>'+
+				'</div>'+
+			'</div>';
+
+			$scope.infowindow.setContent(content);
 			$scope.infowindow.open($scope.map, this);
 		});
 		google.maps.event.addListener(marker, 'mouseout', function() {
