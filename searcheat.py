@@ -7,6 +7,7 @@ from models import db
 
 from resources import Cities
 from resources import Trucks
+from resources import Geocode
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -21,6 +22,7 @@ api = Api(app)
 # resources
 api.add_resource(Cities, '/api/cities/', '/api/cities/<int:id>/')
 api.add_resource(Trucks, '/api/trucks/', '/api/trucks/<int:id>/')
+api.add_resource(Geocode, '/api/geocode/')
 
 @app.route('/')
 def index():

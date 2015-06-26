@@ -21,7 +21,7 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 	$scope.list();
 }]);
 
-controllers.controller('city_controller', ['$scope', '$routeParams', '$location', '$geolocation', 'db', function($scope, $routeParams, $location, $geolocation, db) {
+controllers.controller('city_controller', ['$scope', '$routeParams', '$http', '$location', '$geolocation', 'db', function($scope, $routeParams, $http, $location, $geolocation, db) {
 	$scope.db = new db('cities');
 	$scope.trucks_db = new db('trucks');
 	$scope.city = {};
@@ -40,10 +40,22 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 	$geolocation.getCurrentPosition({
 		timeout: 60000
 	}).then(function(position) {
-		$scope.geoposition = position;
-		console.log($scope.geoposition);
-		$scope.map.setCenter({lat: $scope.geoposition.coords.latitude, lng: $scope.geoposition.coords.longitude});
-		$scope.create_person_marker();
+		var pos = position.coords;
+
+		$http.post('/api/geocode/', {lat: pos.latitude, lng: pos.longitude})
+			.success(function(data) {
+				console.log(data);
+				console.log($scope.city.name);
+				if (data.city == $scope.city.name)
+				{
+					$scope.geoposition = position;
+					$scope.map.setCenter({lat: $scope.geoposition.coords.latitude, lng: $scope.geoposition.coords.longitude});
+					$scope.create_person_marker();
+				}
+			})
+			.error(function(e) {
+				console.log(e);
+			});
 	});
 
 	$scope.infowindow = new google.maps.InfoWindow();
@@ -61,8 +73,6 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 
 	$scope.create_map = function()
 	{
-		/*var style = [{"featureType":"landscape","stylers":[{"saturation":-100},{"lightness":65},{"visibility":"on"}]},{"featureType":"poi","stylers":[{"saturation":-100},{"lightness":51},{"visibility":"simplified"}]},{"featureType":"road.highway","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"road.arterial","stylers":[{"saturation":-100},{"lightness":30},{"visibility":"on"}]},{"featureType":"road.local","stylers":[{"saturation":-100},{"lightness":40},{"visibility":"on"}]},{"featureType":"transit","stylers":[{"saturation":-100},{"visibility":"simplified"}]},{"featureType":"administrative.province","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":-25},{"saturation":-100}]},{"featureType":"water","elementType":"geometry","stylers":[{"hue":"#ffff00"},{"lightness":-25},{"saturation":-97}]}];*/
-
 		$scope.map_options = {
 			center: new google.maps.LatLng($scope.city.geoposition.latitude, $scope.city.geoposition.longitude),
 			zoom: 14,
