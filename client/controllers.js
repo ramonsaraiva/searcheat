@@ -83,7 +83,7 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 			visible: true,
 			icon: {
 				url: '/img/marker.png',
-				size: {width: 256, height: 256},
+				size: {width: 64, height: 64},
 				scaledSize: {width: 64, height: 64}
 			}
 		});
