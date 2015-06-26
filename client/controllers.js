@@ -52,6 +52,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 
 	$scope.map = null;
 	$scope.map_canvas = document.getElementById('map-canvas');
+	$scope.map_markers = [];
 
 	/*pode dar uma merda do caralho
 	google.maps.InfoWindow.prototype.isOpen = function() {
@@ -95,6 +96,40 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			$scope.city = null;
 		});
 
+	$scope.filter_markers_category = function()
+	{
+		//fazer um array de categories pra gerar o select (que provavelmente vem do server) e usar indices
+		if($scope.category == '')
+		{
+			return;
+		}
+
+		console.log($scope.category);
+
+		for(var i in $scope.city.trucks)
+		{
+			//conferir se a ordem ta igual, na real eh melhor adicionar category na marker e nao usar dois arrays
+			if($scope.city.trucks[i].category == $scope.category)
+				$scope.map_markers[i].setVisible(false);
+		}
+	}
+
+	$scope.filter_markers_recent = function()
+	{
+		for(var i in $scope.city.trucks)
+		{
+			//if($scope.city.trucks[i].update bla bla bla)
+		}
+	}
+
+	$scope.filter_markers_events = function()
+	{
+		for(var i in $scope.city.trucks)
+		{
+			//if($scope.city.trucks[i].inEvent bla bla bla)
+		}
+	}
+
 	$scope.create_map = function()
 	{
 		$scope.map_options = {
@@ -117,7 +152,50 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			opts.icon_url = '/img/marker.png';
 			$scope.create_marker(opts);
 		}
+
+		$scope.create_legend();
+		$scope.create_filters();
 	};
+
+	$scope.create_map_gui = function()
+	{
+		//create_legend + create_filters
+	}
+
+	$scope.create_filters = function()
+	{
+		var filter = document.createElement('div');
+		filter.id = 'filter';
+		var content = '<select style="color: black;" ng-model="category" ng-change="filter_markers_category()">'+
+			'<option value=""></option>'+
+			'<option value="hamburguer">Hamburguer</option>'+
+			'<option value="ice_cream">Ice Cream</option>'+
+			'<option value="BRAZIL">Brazil?</option>'+
+		'</select>';
+
+		filter.innerHTML = content;
+		filter.index = 1;
+
+		console.log(filter);
+
+		//soh para testes, nao precisa ficar necessariamente dentro do mapa, ainda mais porque esse vai filtrar a lista tambem
+		$scope.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(filter);
+	}
+
+	$scope.create_legend = function()
+	{
+		var legend = document.createElement('div');
+		legend.id = 'legend';
+		var content = [];
+		content.push('<h3>header</h3>');
+		content.push('<p>Ativos</p>');
+		content.push('<p>Inativos</p>');
+		content.push('<p>Eventos</p>');
+		legend.innerHTML = content.join('');
+		legend.index = 1;
+		console.log(legend.innerHTML);
+		$scope.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+	}
 
 	$scope.create_marker = function(opts)
 	{
@@ -174,6 +252,8 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			$scope.infowindow.close();
 		});
 		*/
+
+		$scope.map_markers.push(marker);
 	}
 
 	$scope.create_person_marker = function()
