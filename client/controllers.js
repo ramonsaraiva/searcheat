@@ -21,7 +21,7 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 	$scope.list();
 }]);
 
-controllers.controller('city_controller', ['$scope', '$routeParams', '$location', 'db', function($scope, $routeParams, $location, db) {
+controllers.controller('city_controller', ['$scope', '$routeParams', '$location', '$geolocation', 'db', function($scope, $routeParams, $location, $geolocation, db) {
 	$scope.db = new db('cities');
 	$scope.trucks_db = new db('trucks');
 	$scope.city = {};
@@ -36,6 +36,15 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 		return (map !== null && typeof map !== 'undefined');
 	}
 	*/
+
+	$geolocation.getCurrentPosition({
+		timeout: 60000
+	}).then(function(position) {
+		$scope.geoposition = position;
+		console.log($scope.geoposition);
+		$scope.map.setCenter({lat: $scope.geoposition.coords.latitude, lng: $scope.geoposition.coords.longitude});
+		$scope.create_person_marker();
+	});
 
 	$scope.infowindow = new google.maps.InfoWindow();
 	$scope.open_marker = null;
@@ -70,7 +79,9 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 
 		for(var i in $scope.city.trucks)
 		{
-			$scope.create_marker($scope.city.trucks[i]);
+			var opts = jQuery.extend({}, $scope.city.trucks[i]);
+			opts.icon_url = '/img/marker.png';
+			$scope.create_marker(opts);
 		}
 	};
 
@@ -82,7 +93,7 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 			position: new google.maps.LatLng(opts.geoposition.latitude, opts.geoposition.longitude),
 			visible: true,
 			icon: {
-				url: '/img/marker.png',
+				url: opts.icon_url,
 				size: {width: 64, height: 64},
 				scaledSize: {width: 64, height: 64}
 			}
@@ -97,7 +108,7 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 				'</div>'+
 				'<div class="col-xs-8">'+
 					'<p>' + opts.name + '</p>'+
-					'<p><small>Última alteração de posição: {{ last_update }}</small></p>'+
+					'<p><small>Última alteração de posição: ' + opts.last_update + '</small></p>'+
 				'</div>'+
 			'</div>'+
 		'</div>';
@@ -130,6 +141,22 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 		});
 		*/
 	}
+
+	$scope.create_person_marker = function()
+	{
+		console.log($scope.map.getCenter());
+		var marker = new google.maps.Marker({
+			title: 'Você',
+			map: $scope.map,
+			position: new google.maps.LatLng($scope.geoposition.coords.latitude, $scope.geoposition.coords.longitude),
+			visible: true,
+			icon: {
+				url: '/img/person_marker.png',
+				size: {width: 512, height: 512},
+				scaledSize: {width: 64, height: 64}
+			}
+		});
+	};
 
 	$scope.map_resize = function()
 	{
