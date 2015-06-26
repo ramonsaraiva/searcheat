@@ -40,7 +40,7 @@
 				<div id="list-tab" class="full-height tab-pane text-left">
 					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-click="detailed(truck.id)">
 						<div class="col-xs-2">
-							<img ng-src="{{truck.icon_url}}" class="img-responsive img-circle" style="min-height:100px; max-width:100px;"/>
+							<img ng-src="{{truck.icon_url}}" class="img-responsive img-circle truck-icon" />
 						</div>
 						<div class="col-xs-4">
 							<h2><strong>{{ truck.name }}</strong></h2>
@@ -65,7 +65,7 @@
 						<div class="col-xs-12">
 							<div id="detailed-name" class="row vertical-align">
 								<div class="col-xs-2 text-center">
-									<img ng-src="{{ truck.icon_url }}" class="img-responsive img-circle" style="min-height: 100px; max-width: 100px;" />
+									<img ng-src="{{ truck.icon_url }}" class="img-responsive img-circle truck-icon-detailed" />
 								</div>
 								<div class="col-xs-4 text-left">
 									<h2><strong>{{ truck.name }}</strong></h2>

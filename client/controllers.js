@@ -56,7 +56,10 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 
 		$scope.map_options = {
 			center: new google.maps.LatLng($scope.city.geoposition.latitude, $scope.city.geoposition.longitude),
-			zoom: 14
+			zoom: 14,
+			panControl: false,
+			mapTypeControl: false,
+			zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL }
 		};
 
 		$scope.map = new google.maps.Map($scope.map_canvas, $scope.map_options);
@@ -79,12 +82,14 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$location'
 			position: new google.maps.LatLng(opts.geoposition.latitude, opts.geoposition.longitude),
 			visible: true,
 			icon: {
-				url: opts.icon_url,
-				scaledSize: {width: 30, height: 30}
+				url: '/img/marker.png',
+				size: {width: 256, height: 256},
+				scaledSize: {width: 64, height: 64}
 			}
 		});
 
 		//coisa mais ridicula e escrota da galaxia, puta merda
+		// ramon: ehUAEHAUHEAUEHAUHEUAHEAUHEUAHeuAHEUAHEUHAE
 		var content = '<div  class="marker-popup">'+
 			'<div class="row vertical-align">'+
 				'<div class="col-xs-4">'+
