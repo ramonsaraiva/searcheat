@@ -2,16 +2,40 @@
 
 var controllers = angular.module('controllers', []);
 
-controllers.controller('guidance_controller', ['$scope', '$location', 'db', function($scope, $location, db) {
+controllers.controller('guidance_controller', ['$scope', '$rootScope', '$http', '$location', '$geolocation', 'db', function($scope, $rootScope, $http, $location, $geolocation, db) {
 	$scope.db = new db('cities');
-	$scope.city = 1;
 
 	$scope.list = function() {
 		$scope.db.list()
 			.success(function(data) {
 				$scope.data = data;
-				console.log($scope.data);
+				$scope.get_current_position();
 			});
+	};
+
+	$scope.get_current_position = function() {
+		$geolocation.getCurrentPosition({
+			timeout: 60000
+		}).then(function(position) {
+			var pos = position.coords;
+
+			$http.post('/api/geocode/', {lat: pos.latitude, lng: pos.longitude})
+				.success(function(data) {
+					$rootScope.geoposition = position;
+					$rootScope.geocity = data.city;
+
+					for (var i in $scope.data)
+					{
+						if ($scope.data[i].name == data.city)
+						{
+							$scope.city = $scope.data[i].id;
+						}
+					}
+				})
+				.error(function(e) {
+					console.log(e);
+				});
+		});
 	};
 
 	$scope.search = function() {
@@ -21,7 +45,7 @@ controllers.controller('guidance_controller', ['$scope', '$location', 'db', func
 	$scope.list();
 }]);
 
-controllers.controller('city_controller', ['$scope', '$routeParams', '$http', '$location', '$geolocation', 'db', function($scope, $routeParams, $http, $location, $geolocation, db) {
+controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams', '$http', '$location', '$geolocation', 'db', function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 	$scope.db = new db('cities');
 	$scope.trucks_db = new db('trucks');
 	$scope.city = {};
@@ -44,12 +68,12 @@ controllers.controller('city_controller', ['$scope', '$routeParams', '$http', '$
 
 		$http.post('/api/geocode/', {lat: pos.latitude, lng: pos.longitude})
 			.success(function(data) {
-				console.log(data);
-				console.log($scope.city.name);
+				$rootScope.geoposition = position;
+				$rootScope.geocity = data.city;
+
 				if (data.city == $scope.city.name)
 				{
-					$scope.geoposition = position;
-					$scope.map.setCenter({lat: $scope.geoposition.coords.latitude, lng: $scope.geoposition.coords.longitude});
+					//$scope.map.setCenter({lat: $scope.geoposition.coords.latitude, lng: $scope.geoposition.coords.longitude});
 					$scope.create_person_marker();
 				}
 			})
