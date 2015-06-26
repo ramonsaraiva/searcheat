@@ -4,18 +4,6 @@
 
 /* de autoria do max */
 
-#top-padding
-{
-	/* background-color: #FFF; */
-	height: 30px;
-	min-width: 410px;
-	width: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-	background: #FFF url('/img/bar.png') repeat-x;
-}
-
 #title img
 {
 	width: 280px;
@@ -31,4 +19,9 @@
 #search-box-container
 {
 	margin-top: 240px;
+}
+
+.new-link
+{
+	margin-top: 10px;
 }

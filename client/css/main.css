@@ -47,6 +47,11 @@ ul
 	margin: 0;
 }
 
+a, a:hover, a:visited, a:active
+{
+	color: #FFF;
+}
+
 .row
 {
    margin-left: 0;
@@ -109,7 +114,7 @@ option
 .full-height.tab
 {
 	background: rgba(0, 0, 0, 0.6);
-	height: calc(100% - 180px);
+	height: calc(100% - 110px);
 }
 
 .vertical-align

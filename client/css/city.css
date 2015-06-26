@@ -2,20 +2,8 @@
  * city.css
  */
 
-#top-padding
-{
-	background-color: #FFF;
-	height: 16px;
-	min-width: 410px;
-	width: 100%;
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-
 #title
 {
-	padding-top: 15px;
 }
 
 #title img

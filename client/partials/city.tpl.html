@@ -1,20 +1,19 @@
 <link rel="stylesheet" href="css/city.css">
 
 <div id="city-view" class="full-height" ng-controller="city_controller">
-	<div id="header">
-		<!--
-		<div id="top-padding">
-		</div>
-		-->
-		<div id="title">
-			<a ng-href="#/"><img src="img/searcheat_circle_2.png" /></a>
-		</div>
-	</div>
-
 	<div class="row full-height no-header text-center">
 		<div class="full-height col-lg-8 col-md-8 col-sm-10 col-xs-offset-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
-			<div id="city-name">
-				<h1 ng-cloak>FOODTRUCKS EM <strong>{{ city.name }}</strong></h1>
+			<div class="row">
+				<div class="col-xs-2">
+					<div id="title">
+						<a ng-href="#/"><img src="img/searcheat_circle_2.png" /></a>
+					</div>
+				</div>
+				<div class="col-xs-10">
+					<div id="city-name">
+						<h1 ng-cloak>FOODTRUCKS EM <strong>{{ city.name }}</strong></h1>
+					</div>
+				</div>
 			</div>
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active col-xs-4">
