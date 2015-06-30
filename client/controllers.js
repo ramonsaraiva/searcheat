@@ -302,3 +302,16 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		}
 	});
 }]);
+
+
+controllers.controller('register_truck_controller',
+['$scope', '$rootScope', '$routeParams', '$http', '$location', '$geolocation', 'db',
+function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
+	$scope.truck = {};
+
+	$scope.init = function() {
+
+	};
+
+	$scope.init();
+}]);
