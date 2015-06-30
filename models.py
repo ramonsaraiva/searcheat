@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -5,6 +6,15 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from pygeocoder import Geocoder as geo
 
 db = SQLAlchemy()
+
+_punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
+
+def slugify(text, delim=u'-'):
+	"""Generates an ASCII-only slug."""
+	result = []
+	for word in _punct_re.split(text.lower()):
+		result.append(word)
+	return unicode(delim.join(result))
 
 class Geoposition(db.Model):
 	__tablename__ = 'geoposition'
@@ -31,6 +41,7 @@ class City(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64))
+	slug = db.Column(db.String(64))
 	geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)
 	geoposition = db.relationship('Geoposition', backref=db.backref('city', uselist=False))
 	trucks = db.relationship('Truck', backref='city', lazy='dynamic', cascade='all, delete-orphan', order_by='Truck.name')
@@ -40,6 +51,9 @@ class City(db.Model):
 
 	def __repr__(self):
 		return '<City {0}:{1}'.format(self.id, self.name)
+
+	def slugify(self):
+		self.slug = slugify(self.name, '-')
 
 	@property
 	def serialize_simple(self):
@@ -64,6 +78,8 @@ class City(db.Model):
 
 	def create(self, geo_data):
 		self.name = geo_data.city
+		self.slugify()
+
 		self.geoposition = Geoposition()
 		self.geoposition.latitude = geo_data.latitude
 		self.geoposition.longitude = geo_data.longitude
@@ -81,10 +97,14 @@ class FoodType(db.Model):
 	
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(32))
+	slug = db.Column(db.String(32))
 	priority = db.Column(db.Integer())
 
 	def __repr__(self):
 		return '<FoodType {0}:{1}>'.format(self.id, self.name)
+
+	def slugify(self):
+		self.slug = slugify(self.name, '-')
 
 	@property
 	def serialize(self):
@@ -98,6 +118,7 @@ class Truck(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64))
+	slug = db.Column(db.String(64))
 	city_id = db.Column(db.Integer, db.ForeignKey('city.id', ondelete='CASCADE'), nullable=False)
 	geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)
 	geoposition = db.relationship('Geoposition', backref=db.backref('truck', uselist=False))
@@ -113,6 +134,9 @@ class Truck(db.Model):
 	def __repr__(self):
 		return '<Truck {0}:{1}>'.format(self.id, self.name)
 
+	def slugify(self):
+		self.slug = slugify(self.name, '-')
+
 	@property
 	def serialize(self):
 		return {
@@ -127,6 +151,8 @@ class Truck(db.Model):
 
 	def create(self, data):
 		self.name = data['name']
+		self.slugify()
+
 		self.geoposition = Geoposition()
 		self.geoposition.latitude = data['geoposition']['latitude']
 		self.geoposition.longitude = data['geoposition']['longitude']

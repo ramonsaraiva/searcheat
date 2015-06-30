@@ -59,7 +59,7 @@ def reset():
 		'Pizzas',
 		'Cachorro Quente',
 		'Massas',
-		'Wraps',
+		'Wrap',
 		'Peixes',
 		'Japonesa',
 		'Mexicana',
@@ -69,12 +69,15 @@ def reset():
 		'Doces',
 		'Gelados',
 		'Cervejas',
-		'Bebidas'
+		'Bebidas',
+		'Cafes'
 	]
 
 	for foodtype in foodtypes:
 		f = FoodType()
 		f.name = foodtype
+		f.slugify()
+
 		f.priority = 1
 		db.session.add(f)
 
