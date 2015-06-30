@@ -310,6 +310,10 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			jQuery('[data-target="#list-tab"]').click();
 		}
 	});
+
+	jQuery('[data-target="#map-tab"]').on('shown.bs.tab', function(e) {
+		google.maps.event.trigger($scope.map, 'resize');
+	})
 }]);
 
 
@@ -321,8 +325,10 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 
 	$scope.init = function() {
 		$scope.map.create();
+		//google.maps.event.addDomListener(window, 'load', $scope.map.create);
 	};
 
+	//so i'm following the map that leads to you
 	$scope.map.create = function() {
 		$scope.map.canvas = document.getElementById('register-map');
 		$scope.map.options = {
@@ -335,6 +341,34 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 		};
 
 		$scope.map.control = new google.maps.Map($scope.map.canvas, $scope.map.options);
+
+/*
+		//a coisa ta feia
+		google.maps.event.addListener($scope.map.control, 'idle', function() {
+			console.log('idle');
+			google.maps.event.trigger($scope.map.control, 'resize');
+		});
+		google.maps.event.addListenerOnce($scope.map.control, 'tilesloaded', function() {
+			console.log('fhgsrhrhgwhzzzzzzzzzzzzzzzzzzzzzt');
+			google.maps.event.addListenerOnce($scope.map.control, 'tilesloaded', function() {
+				google.maps.event.trigger($scope.map.control, 'resize');
+				console.log('fhgsrhrhgwht');
+			});
+		});
+
+		$scope.map.current_center = null;
+		google.maps.event.addListener($scope.map.control, 'resize', function() {
+			$scope.map.current_center = $scope.map.control.getCenter();
+		});
+
+		google.maps.event.addListener($scope.map.control, 'bounds_changed', function() {
+			if($scope.map.current_center) {
+				$scope.map.control.setCenter($scope.map.current_center);
+			}
+
+			$scope.map.current_center = null;
+		});
+*/
 
 		$scope.map.create_input();
 		$scope.map.create_marker();
