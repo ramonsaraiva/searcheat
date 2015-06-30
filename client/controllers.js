@@ -337,6 +337,7 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 		$scope.map.control = new google.maps.Map($scope.map.canvas, $scope.map.options);
 
 		$scope.map.create_input();
+		$scope.map.create_marker();
 	};
 
 	$scope.map.create_input = function() {
@@ -355,20 +356,29 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 			}
 
 			$scope.map.control.fitBounds(bounds);
+			$scope.map.marker.setPosition($scope.map.control.getCenter());
 		});
 	};
 
 	$scope.map.create_marker = function() {
 		$scope.map.marker = new google.maps.Marker({
 			title: $scope.truck.name,
-			position: new google.maps.LatLng(),
+			map: $scope.map.control,
+			position: $scope.map.control.getCenter(),
 			visible: true,
+			draggable: true,
 
 			icon: {
 				url: '/img/marker.png',
 				size: {width: 64, height: 64},
 				scaledSize: {width: 64, height: 64}
 			}
+		});
+
+		console.log($scope.map.control.getCenter());
+
+		google.maps.event.addListener($scope.map.marker, 'dragend', function() {
+			console.log($scope.map.marker.getPosition());
 		});
 	}
 
