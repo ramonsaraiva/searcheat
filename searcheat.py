@@ -4,6 +4,7 @@ from flask import send_from_directory
 from flask.ext.restful import Api
 
 from models import db
+from models import FoodType
 
 from resources import Cities
 from resources import Trucks
@@ -51,4 +52,31 @@ def reset():
 	from fill import fill
 	db.drop_all()
 	db.create_all()
+
+	foodtypes = [
+		'Hamburguer',
+		'Frango',
+		'Pizzas',
+		'Cachorro Quente',
+		'Massas',
+		'Wraps',
+		'Peixes',
+		'Japonesa',
+		'Mexicana',
+		'Indiana',
+		'Vegana',
+		'Vegetariana',
+		'Doces',
+		'Gelados',
+		'Cervejas',
+		'Bebidas'
+	]
+
+	for foodtype in foodtypes:
+		f = FoodType()
+		f.name = foodtype
+		f.priority = 1
+		db.session.add(f)
+
+	db.session.commit()
 	fill()
