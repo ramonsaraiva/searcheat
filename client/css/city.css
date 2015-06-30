@@ -172,3 +172,15 @@
         font-size: 13px;
         font-weight: 300;
       }
+
+.img-map
+{
+	width: 35px;
+	opacity: 0.4;
+}
+
+.img-map.selected
+{
+	background-color: rgba(212, 63, 58, 0.3);
+	opacity: 1;
+}

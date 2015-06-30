@@ -54,6 +54,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 	$scope.map_canvas = document.getElementById('map-canvas');
 	$scope.map_markers = [];
 
+	$scope.filter_modified = false;
 	$scope.creating = false;
 
 	/*pode dar uma merda do caralho
@@ -93,26 +94,71 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			$scope.city = data;
 			$scope.create_map();
 			console.log($scope.city);
+
+			$scope.foodtypes = {};
+			for (var i = 0, truck; truck = $scope.city.trucks[i]; i++)
+			{
+				truck.visible = true;
+
+				for (var j = 0, foodtype; foodtype = truck.foodtypes[j]; j++)
+				{
+					$scope.foodtypes[foodtype.id] = { id: foodtype.id, name: foodtype.name, slug: foodtype.slug };
+				}
+			}
 		})
 		.error(function(e) {
 			$scope.city = null;
 		});
 
-	$scope.filter_markers_category = function()
+	$scope.foodtype_onclick = function(id)
 	{
-		//fazer um array de categories pra gerar o select (que provavelmente vem do server) e usar indices
-		if($scope.category == '')
+		if (!$scope.filter_modified)
 		{
+			$scope.filter_modified = true;
+			$scope.foodtypes_selected = [];
+		}
+
+		var i = $scope.foodtypes_selected.indexOf(id);
+
+		if (i >= 0)
+		{
+			$scope.foodtypes_selected.splice(i, 1);
+		}
+		else
+		{
+			$scope.foodtypes_selected.push(id);
+		}
+			
+		if ($scope.foodtypes_selected.length == 0)
+		{
+			for (var i = 0, truck, marker; truck = $scope.city.trucks[i], marker = $scope.map_markers[i]; i++)
+			{
+				truck.visible = true;
+				marker.setVisible(true);
+			}
+
 			return;
 		}
 
-		console.log($scope.category);
+		$scope.filter_by_foodtype();
+	}
 
-		for(var i in $scope.city.trucks)
+	$scope.filter_by_foodtype = function()
+	{
+		for (var i = 0, truck, marker; truck = $scope.city.trucks[i], marker = $scope.map_markers[i]; i++)
 		{
-			//conferir se a ordem ta igual, na real eh melhor adicionar category na marker e nao usar dois arrays
-			if($scope.city.trucks[i].category == $scope.category)
-				$scope.map_markers[i].setVisible(false);
+			truck.visible = false;
+			marker.setVisible(false);
+
+			for (var j = 0, foodtype; foodtype = $scope.foodtypes_selected[j]; j++)
+			{
+				if (truck.foodtypes_ids.indexOf(foodtype) >= 0)
+				{
+					truck.visible = true;
+					marker.setVisible(true);
+					break;
+				}
+			}
 		}
 	}
 
@@ -139,7 +185,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			zoom: 14,
 			panControl: false,
 			mapTypeControl: false,
-			zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL }
+			zoomControlOptions: { style: google.maps.ZoomControlStyle.SMALL, position: google.maps.ControlPosition.RIGHT_TOP }
 		};
 
 		$scope.map = new google.maps.Map($scope.map_canvas, $scope.map_options);
@@ -155,33 +201,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		}
 
 		$scope.create_legend();
-		$scope.create_filters();
 	};
-
-	$scope.create_map_gui = function()
-	{
-		//create_legend + create_filters
-	}
-
-	$scope.create_filters = function()
-	{
-		var filter = document.createElement('div');
-		filter.id = 'filter';
-		var content = '<select style="color: black;" ng-model="category" ng-change="filter_markers_category()">'+
-			'<option value=""></option>'+
-			'<option value="hamburguer">Hamburguer</option>'+
-			'<option value="ice_cream">Ice Cream</option>'+
-			'<option value="BRAZIL">Brazil?</option>'+
-		'</select>';
-
-		filter.innerHTML = content;
-		filter.index = 1;
-
-		console.log(filter);
-
-		//soh para testes, nao precisa ficar necessariamente dentro do mapa, ainda mais porque esse vai filtrar a lista tambem
-		$scope.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(filter);
-	}
 
 	// essa funcao cria uma lenda
 	$scope.create_legend = function()
@@ -196,7 +216,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		legend.innerHTML = content.join('');
 		legend.index = 1;
 		console.log(legend.innerHTML);
-		$scope.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+		$scope.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 	}
 
 	$scope.create_marker = function(opts)

@@ -149,7 +149,8 @@ class Truck(db.Model):
 			'icon': self.icon,
 			'icon_url': '{0}{1}'.format('/icons/', self.icon),
 			'last_update': self.last_update.strftime('%d/%m/%Y'),
-			'foodtypes': [f.serialize for f in self.foodtypes]
+			'foodtypes': [f.serialize for f in self.foodtypes],
+			'foodtypes_ids': [f.id for f in self.foodtypes]
 		}
 
 	def create(self, data):

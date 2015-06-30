@@ -13,6 +13,7 @@
 					</div>
 				</div>
 			</div>
+
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active col-xs-4">
 					<a data-target="#map-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a>
@@ -35,10 +36,17 @@
 
 				<!-- LIST TAB -->
 				<div id="list-tab" class="full-height tab-pane text-left">
-						<div class="col-xs-12">
-							<button class="btn btn-danger form-control" ng-click="create()">+</button>
+					<button class="btn btn-danger form-control" ng-click="create()" style="position: fixed; float: left; z-index: 50; width: 30px;">+</button>
+					<button class="btn btn-danger form-control" ng-click="filter = !filter" style="position: fixed; float: left; z-index: 50; width: 30px; margin-left: 30px;">F</button>
+					<div ng-show="filter" class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-1" ng-repeat="foodtype in foodtypes">
+								<img src="/img/foodtypes/{{ foodtype.slug }}.png" class="img-circle img-map center-block" ng-class="foodtypes_selected.indexOf(foodtype.id) >= 0 ? 'selected' : ''" ng-click="foodtype_onclick(foodtype.id)" />
+							</div>
 						</div>
-					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-class-odd="'list-row-odd'" ng-class-even="'list-row-even'" ng-click="detailed(truck.id)">
+						<hr/>
+					</div>
+					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-show="truck.visible" ng-class-odd="'list-row-odd'" ng-class-even="'list-row-even'" ng-click="detailed(truck.id)">
 						<div class="col-xs-2">
 							<img ng-src="{{truck.icon_url}}" class="img-responsive img-rounded truck-icon center-block" />
 						</div>
