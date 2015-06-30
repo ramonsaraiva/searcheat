@@ -325,6 +325,8 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 
 	$scope.init = function() {
 		$scope.map.create();
+		window.registerMap = $scope.map.control;
+		console.log('init');
 		//google.maps.event.addDomListener(window, 'load', $scope.map.create);
 	};
 
