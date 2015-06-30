@@ -68,6 +68,7 @@ class City(db.Model):
 		return {
 			'id': self.id,
 			'name': self.name,
+			'slug': self.slug,
 			'geoposition': self.geoposition.serialize,
 			'trucks': self.serialize_trucks
 		}
@@ -110,7 +111,8 @@ class FoodType(db.Model):
 	def serialize(self):
 		return {
 			'id': self.id,
-			'name': self.name
+			'name': self.name,
+			'slug': self.slug
 		}
 
 class Truck(db.Model):
@@ -146,7 +148,8 @@ class Truck(db.Model):
 			'address': self.address,
 			'icon': self.icon,
 			'icon_url': '{0}{1}'.format('/icons/', self.icon),
-			'last_update': self.last_update.strftime('%d/%m/%Y')
+			'last_update': self.last_update.strftime('%d/%m/%Y'),
+			'foodtypes': [f.serialize for f in self.foodtypes]
 		}
 
 	def create(self, data):

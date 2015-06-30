@@ -54,12 +54,12 @@ class Trucks(Resource):
 		truck.create(args)
 		city.trucks.append(truck)
 
+		db.session.add(city)
+		db.session.flush()
+
 		if args['icon']:
 			icon = '{0}.{1}'.format(truck.id, get_format(args['icon']))
 			truck.icon = icon
-
-		db.session.add(city)
-		db.session.flush()
 
 		foodtypes = FoodType.query.filter(FoodType.id.in_(args['foodtypes']))
 		for f in foodtypes:

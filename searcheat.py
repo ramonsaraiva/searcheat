@@ -54,23 +54,23 @@ def reset():
 	db.create_all()
 
 	foodtypes = [
-		'Hamburguer',
-		'Frango',
-		'Pizzas',
-		'Cachorro Quente',
-		'Massas',
-		'Wrap',
-		'Peixes',
-		'Japonesa',
-		'Mexicana',
-		'Indiana',
-		'Vegana',
-		'Vegetariana',
-		'Doces',
-		'Gelados',
-		'Cervejas',
-		'Bebidas',
-		'Cafes'
+		'Hamburguer',		# 1
+		'Frango',			# 2
+		'Pizza',			# 3
+		'Cachorro Quente',	# 4
+		'Massas',			# 5
+		'Wrap',				# 6
+		'Peixes',			# 7
+		'Japonesa',			# 8
+		'Mexicana',			# 9
+		'Indiana',			# 10
+		'Vegana',			# 11
+		'Vegetariana',		# 12
+		'Doces',			# 13
+		'Gelados',			# 14
+		'Cervejas',			# 15
+		'Bebidas',			# 16
+		'Cafes'				# 17
 	]
 
 	for foodtype in foodtypes:
