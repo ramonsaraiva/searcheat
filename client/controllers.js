@@ -319,6 +319,7 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 		$scope.map.options = {
 			center: new google.maps.LatLng(-15.126867635531303, -53.18050174999996),
 			zoom: 3,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			panControl: false,
 			mapTypeControl: false,
 			zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL}
@@ -332,6 +333,20 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 	$scope.map.create_input = function() {
 		var input = document.getElementById('pac-input');
 		$scope.map.control.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
+
+		var search_box = new google.maps.places.SearchBox(input);
+
+		google.maps.event.addListener(search_box, 'places_changed', function() {
+			var bounds = new google.maps.LatLngBounds();
+
+			var places = search_box.getPlaces();
+			for(var i = 0, place; place = places[i]; i++)
+			{
+				bounds.extend(place.geometry.location);
+			}
+
+			$scope.map.control.fitBounds(bounds);
+		});
 	};
 
 	$scope.map.create_marker = function() {
