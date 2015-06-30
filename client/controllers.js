@@ -215,7 +215,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		var content = '<div  class="marker-popup">'+
 			'<div class="row vertical-align">'+
 				'<div class="col-xs-4">'+
-					'<img src="' + opts.icon + '" class="img-responsive img-circle" /></a>'+
+					'<img src="' + opts.icon_url + '" class="img-responsive img-circle" /></a>'+
 				'</div>'+
 				'<div class="col-xs-8">'+
 					'<p>' + opts.name + '</p>'+
@@ -307,32 +307,30 @@ controllers.controller('register_truck_controller',
 ['$scope', '$rootScope', '$routeParams', '$http', '$location', '$geolocation', 'db',
 function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 	$scope.truck = {};
-	$scope.city = {};
 	$scope.map =  {};
 
-	$scope.db = new db('cities');
-
 	$scope.init = function() {
-		$scope.db.read()
-		.success(function(data) {
-			$scope.map.create();
-		});
+		$scope.map.create();
 	};
 
 	$scope.map.create = function() {
+		$scope.map.canvas = document.getElementById('register-map');
 		$scope.map.options = {
-			center: new google.maps.LatLng($scope.city.geoposition.latitude, $scope.city.geoposition.longitude),
-			zoom: 14,
+			center: new google.maps.LatLng(-15.126867635531303, -53.18050174999996),
+			zoom: 3,
 			panControl: false,
 			mapTypeControl: false,
 			zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL}
 		};
 
 		$scope.map.control = new google.maps.Map($scope.map.canvas, $scope.map.options);
+
+		$scope.map.create_input();
 	};
 
 	$scope.map.create_input = function() {
-		var input = document.createElement('input');
+		var input = document.getElementById('pac-input');
+		$scope.map.control.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 	};
 
 	$scope.map.create_marker = function() {
