@@ -181,6 +181,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		$scope.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(filter);
 	}
 
+	// essa funcao cria uma lenda
 	$scope.create_legend = function()
 	{
 		var legend = document.createElement('div');
