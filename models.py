@@ -166,3 +166,7 @@ class Truck(db.Model):
 
 		self.creation_date = datetime.now()
 		self.last_update = datetime.now()
+
+class User(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	

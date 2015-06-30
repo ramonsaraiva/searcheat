@@ -40,7 +40,7 @@ class User(db.Model):
 post_tags_table = db.Table('post_tags', db.Model.metadata,
                            db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
                            db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
-                           )
+                          )
 
 
 class Post(db.Model):

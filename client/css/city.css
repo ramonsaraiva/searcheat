@@ -45,7 +45,7 @@
 
 #city-name
 {
-	margin-top: 40px;
+	margin-top: 15px;
 	margin-bottom: 20px;
 	background: rgba(0, 0, 0, 0.4);
 }
@@ -83,9 +83,24 @@
 	cursor: pointer;
 }
 
-.list-row:hover
+.list-row-odd
+{
+}
+
+.list-row-even
 {
 	background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+.list-row-odd:hover
+{
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.list-row-even:hover
+{
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .truck-icon

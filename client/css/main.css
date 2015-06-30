@@ -114,7 +114,7 @@ option
 .full-height.tab
 {
 	background: rgba(0, 0, 0, 0.6);
-	height: calc(100% - 110px);
+	height: calc(100% - 120px);
 }
 
 .vertical-align
