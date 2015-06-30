@@ -33,36 +33,14 @@
 					<div id="map-canvas" class="full-height">
 					</div>
 
-					<div id="register-truck" ng-controller="register_truck_controller">
-						<h3>Mapa</h3>
-						<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-						<div id="register-map" style="height: 400px;"></div>
-						<label>Cidade:</label><br/>
-						<input type="text" ng-model="truck.city"/>
-						<label>Nome:</label>
-						<input type="text" ng-model="truck.name"/>
-
-						<h3>Opcional</h3>
-						<label>Tipos de comida:</label><br/>
-						<!-- ou radio seila -->
-						<select ng-model="truck.types">
-						</select>
-						<label>Contato:</label>
-						<input type="text" ng-model="truck.contact.twitter"/>
-						<input type="text" ng-model="truck.contact.facebook"/>
-						<input type="text" ng-model="truck.contact.phone"/>
-
-						<h3>Só quando for registrado oficialmente</h3>
-						<label>Ícone:</label><br/>
-						<label>Cardapio:</label><br/>
-						<label>Localização atual:</label><br/>
-						<label>Última atualização:</label>
-					</div>
 				</div>
 				<!-- END OF MAP TAB -->
 
 				<!-- LIST TAB -->
 				<div id="list-tab" class="full-height tab-pane text-left">
+						<div class="col-xs-12">
+							<button class="btn btn-danger form-control" ng-click="create()">+</button>
+						</div>
 					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-click="detailed(truck.id)">
 						<div class="col-xs-2">
 							<img ng-src="{{truck.icon_url}}" class="img-responsive img-rounded truck-icon center-block" />
@@ -87,7 +65,7 @@
 				<!-- END OF LIST TAB -->
 
 				<div id="detailed-tab" class="full-height tab-pane">
-					<div class="row">
+					<div ng-cloak ng-hide="creating" class="row">
 						<div class="col-xs-12">
 							<div id="detailed-name" class="row vertical-align">
 								<div class="col-xs-2 text-center">
@@ -106,6 +84,33 @@
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div ng-cloak ng-show="creating">
+						<div id="register-truck" ng-controller="register_truck_controller">
+							<h3>Mapa</h3>
+							<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+							<div id="register-map" style="height: 400px;"></div>
+							<label>Cidade:</label><br/>
+							<input type="text" ng-model="truck.city"/>
+							<label>Nome:</label>
+							<input type="text" ng-model="truck.name"/>
+
+							<h3>Opcional</h3>
+							<label>Tipos de comida:</label><br/>
+							<!-- ou radio seila -->
+							<select ng-model="truck.types">
+							</select>
+							<label>Contato:</label>
+							<input type="text" ng-model="truck.contact.twitter"/>
+							<input type="text" ng-model="truck.contact.facebook"/>
+							<input type="text" ng-model="truck.contact.phone"/>
+
+							<h3>Só quando for registrado oficialmente</h3>
+							<label>Ícone:</label><br/>
+							<label>Cardapio:</label><br/>
+							<label>Localização atual:</label><br/>
+							<label>Última atualização:</label>
 						</div>
 					</div>
 				</div>

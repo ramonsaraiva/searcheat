@@ -54,6 +54,8 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 	$scope.map_canvas = document.getElementById('map-canvas');
 	$scope.map_markers = [];
 
+	$scope.creating = false;
+
 	/*pode dar uma merda do caralho
 	google.maps.InfoWindow.prototype.isOpen = function() {
 		console.log(infoWindow);
@@ -285,18 +287,25 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 				$scope.truck = data;
 				console.log(data);
 				jQuery('[data-target="#detailed-tab"]').click();
+				$scope.creating = false;
 			})
 			.error(function(e) {
 				console.log(e);
 			});
 	};
 
+	$scope.create = function()
+	{
+		$scope.creating = true;
+		jQuery('[data-target="#detailed-tab"]').click();
+	}
+
 	/*
 	 * se o cara aperta na detailed tab sem selecionar nenhum truck..
 	 * retorna pra tab da lista :)
 	 */
 	jQuery('[data-target="#detailed-tab"]').on('shown.bs.tab', function(e) {
-		if (!$scope.truck)
+		if (!$scope.truck && !$scope.creating)
 		{
 			jQuery('[data-target="#list-tab"]').click();
 		}
