@@ -149,7 +149,6 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		for(var i in $scope.city.trucks)
 		{
 			var opts = jQuery.extend({}, $scope.city.trucks[i]);
-			opts.icon_url = '/img/marker.png';
 			$scope.create_marker(opts);
 		}
 
@@ -205,7 +204,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			position: new google.maps.LatLng(opts.geoposition.latitude, opts.geoposition.longitude),
 			visible: true,
 			icon: {
-				url: opts.icon_url,
+				url: '/img/marker.png',
 				size: {width: 64, height: 64},
 				scaledSize: {width: 64, height: 64}
 			}
@@ -216,7 +215,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		var content = '<div  class="marker-popup">'+
 			'<div class="row vertical-align">'+
 				'<div class="col-xs-4">'+
-					'<img src="' + opts.icon_url + '" class="img-responsive img-circle" /></a>'+
+					'<img src="' + opts.icon + '" class="img-responsive img-circle" /></a>'+
 				'</div>'+
 				'<div class="col-xs-8">'+
 					'<p>' + opts.name + '</p>'+
@@ -331,6 +330,24 @@ function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 
 		$scope.map.control = new google.maps.Map($scope.map.canvas, $scope.map.options);
 	};
+
+	$scope.map.create_input = function() {
+		var input = document.createElement('input');
+	};
+
+	$scope.map.create_marker = function() {
+		$scope.map.marker = new google.maps.Marker({
+			title: $scope.truck.name,
+			position: new google.maps.LatLng(),
+			visible: true,
+
+			icon: {
+				url: '/img/marker.png',
+				size: {width: 64, height: 64},
+				scaledSize: {width: 64, height: 64}
+			}
+		});
+	}
 
 	$scope.init();
 }]);
