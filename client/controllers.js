@@ -308,9 +308,28 @@ controllers.controller('register_truck_controller',
 ['$scope', '$rootScope', '$routeParams', '$http', '$location', '$geolocation', 'db',
 function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 	$scope.truck = {};
+	$scope.city = {};
+	$scope.map =  {};
+
+	$scope.db = new db('cities');
 
 	$scope.init = function() {
+		$scope.db.read()
+		.success(function(data) {
+			$scope.map.create();
+		});
+	};
 
+	$scope.map.create = function() {
+		$scope.map.options = {
+			center: new google.maps.LatLng($scope.city.geoposition.latitude, $scope.city.geoposition.longitude),
+			zoom: 14,
+			panControl: false,
+			mapTypeControl: false,
+			zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL}
+		};
+
+		$scope.map.control = new google.maps.Map($scope.map.canvas, $scope.map.options);
 	};
 
 	$scope.init();
