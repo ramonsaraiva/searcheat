@@ -1,11 +1,14 @@
 from datetime import datetime
 
 from flask.ext.sqlalchemy import SQLAlchemy
+
 from pygeocoder import Geocoder as geo
 
 db = SQLAlchemy()
 
 class Geoposition(db.Model):
+	__tablename__ = 'geoposition'
+
 	id = db.Column(db.Integer, primary_key=True)
 	latitude = db.Column(db.Float(), nullable=False)
 	longitude = db.Column(db.Float(), nullable=False)
@@ -24,6 +27,8 @@ class Geoposition(db.Model):
 		}
 
 class City(db.Model):
+	__tablename__ = 'city'
+
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64))
 	geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)
@@ -65,7 +70,32 @@ class City(db.Model):
 		self.geoposition.accuracy = 14
 		self.creation_date = datetime.now()
 
+
+truck_foodtype = db.Table('truck_foodtype',
+	db.Column('truck_id', db.Integer, db.ForeignKey('truck.id')),
+	db.Column('foodtype_id', db.Integer, db.ForeignKey('foodtype.id'))
+)
+
+class FoodType(db.Model):
+	__tablename__ = 'foodtype'
+	
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(32))
+	priority = db.Column(db.Integer())
+
+	def __repr__(self):
+		return '<FoodType {0}:{1}>'.format(self.id, self.name)
+
+	@property
+	def serialize(self):
+		return {
+			'id': self.id,
+			'name': self.name
+		}
+
 class Truck(db.Model):
+	__tablename__ = 'truck'
+
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(64))
 	city_id = db.Column(db.Integer, db.ForeignKey('city.id', ondelete='CASCADE'), nullable=False)
@@ -73,6 +103,8 @@ class Truck(db.Model):
 	geoposition = db.relationship('Geoposition', backref=db.backref('truck', uselist=False))
 	address = db.Column(db.String(128))
 	icon = db.Column(db.String(64))
+
+	foodtypes = db.relationship('FoodType', secondary=truck_foodtype, backref=db.backref('trucks', lazy='dynamic'))
 
 	# dates
 	creation_date = db.Column(db.DateTime(), nullable=False)
@@ -102,5 +134,6 @@ class Truck(db.Model):
 
 		self.address = geo.reverse_geocode(self.geoposition.latitude,
 												self.geoposition.longitude).formatted_address
+
 		self.creation_date = datetime.now()
 		self.last_update = datetime.now()

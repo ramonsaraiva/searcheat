@@ -11,6 +11,7 @@ TRUCKS_DATA = [
 			'longitude': -51.125899,
 			'accuracy': 8
 		},
+		'foodtypes': [1, 2, 3],
 		'icon': 'ramon_foodtruck.jpg'
 	}
 	,
@@ -21,6 +22,7 @@ TRUCKS_DATA = [
 			'longitude': -51.135877,
 			'accuracy': 8
 		},
+		'foodtypes': [1, 2, 3],
 		'icon': 'breno_foodtruck.jpg'
 	},
 	{
@@ -30,6 +32,7 @@ TRUCKS_DATA = [
 			'longitude': -51.1009033,
 			'accuracy': 8
 		},
+		'foodtypes': [1, 2, 3],
 		'icon': 'caucakes.jpg'
 	},
 	{
@@ -39,6 +42,7 @@ TRUCKS_DATA = [
 			'longitude': -51.1170536,
 			'accuracy': 8
 		},
+		'foodtypes': [1, 2, 3],
 		'icon': 'jackie_and_jack.jpg'
 	},
 	{
@@ -48,6 +52,7 @@ TRUCKS_DATA = [
 			'longitude': -51.061647,
 			'accuracy': 8
 		},
+		'foodtypes': [1, 2, 3],
 		'icon': 'lu.jpg'
 	}
 ]
