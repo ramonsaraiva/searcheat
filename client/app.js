@@ -15,4 +15,7 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/cidade/:id/', {
 			templateUrl: 'partials/city.tpl.html'
 		})
+		.when('/truck-form', {
+			templateUrl: 'partials/truck-form.tpl.html'
+		});
 }]);

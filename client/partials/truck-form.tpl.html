@@ -1,7 +1,12 @@
-<div id="register-truck" ng-controller="register_truck_controller">
+<link rel="stylesheet" href="css/truck-form.css">
+
+<div id="truck-form" ng-controller="truck-form-controller">
 	<h3>Mapa</h3>
+
 	<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-	<div id="register-map" style="height: 400px;"></div>
+	<div id="truck-form-map" style="width: 500px; height: 500px;">
+	</div>
+
 	<label>Cidade:</label><br/>
 	<input type="text" ng-model="truck.city"/>
 	<label>Nome:</label>

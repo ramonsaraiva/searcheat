@@ -99,7 +99,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			for (var i = 0, truck; truck = $scope.city.trucks[i]; i++)
 			{
 				truck.visible = true;
-				
+
 				var address_splitted = truck.address.split(',');
 				truck.address = address_splitted[0] + address_splitted[1];
 
@@ -332,109 +332,4 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 	jQuery('[data-target="#map-tab"]').on('shown.bs.tab', function(e) {
 		google.maps.event.trigger($scope.map, 'resize');
 	})
-}]);
-
-
-controllers.controller('register_truck_controller',
-['$scope', '$rootScope', '$routeParams', '$http', '$location', '$geolocation', 'db',
-function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
-	$scope.truck = {};
-	$scope.map =  {};
-
-	$scope.init = function() {
-		$scope.map.create();
-		window.registerMap = $scope.map.control;
-		console.log('init');
-		//google.maps.event.addDomListener(window, 'load', $scope.map.create);
-	};
-
-	//so i'm following the map that leads to you
-	$scope.map.create = function() {
-		$scope.map.canvas = document.getElementById('register-map');
-		$scope.map.options = {
-			center: new google.maps.LatLng(-15.126867635531303, -53.18050174999996),
-			zoom: 3,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			panControl: false,
-			mapTypeControl: false,
-			zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL}
-		};
-
-		$scope.map.control = new google.maps.Map($scope.map.canvas, $scope.map.options);
-
-/*
-		//a coisa ta feia
-		google.maps.event.addListener($scope.map.control, 'idle', function() {
-			console.log('idle');
-			google.maps.event.trigger($scope.map.control, 'resize');
-		});
-		google.maps.event.addListenerOnce($scope.map.control, 'tilesloaded', function() {
-			console.log('fhgsrhrhgwhzzzzzzzzzzzzzzzzzzzzzt');
-			google.maps.event.addListenerOnce($scope.map.control, 'tilesloaded', function() {
-				google.maps.event.trigger($scope.map.control, 'resize');
-				console.log('fhgsrhrhgwht');
-			});
-		});
-
-		$scope.map.current_center = null;
-		google.maps.event.addListener($scope.map.control, 'resize', function() {
-			$scope.map.current_center = $scope.map.control.getCenter();
-		});
-
-		google.maps.event.addListener($scope.map.control, 'bounds_changed', function() {
-			if($scope.map.current_center) {
-				$scope.map.control.setCenter($scope.map.current_center);
-			}
-
-			$scope.map.current_center = null;
-		});
-*/
-
-		$scope.map.create_input();
-		$scope.map.create_marker();
-	};
-
-	$scope.map.create_input = function() {
-		var input = document.getElementById('pac-input');
-		$scope.map.control.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
-
-		var search_box = new google.maps.places.SearchBox(input);
-
-		google.maps.event.addListener(search_box, 'places_changed', function() {
-			var bounds = new google.maps.LatLngBounds();
-
-			var places = search_box.getPlaces();
-			for(var i = 0, place; place = places[i]; i++)
-			{
-				bounds.extend(place.geometry.location);
-			}
-
-			$scope.map.control.fitBounds(bounds);
-			$scope.map.marker.setPosition($scope.map.control.getCenter());
-		});
-	};
-
-	$scope.map.create_marker = function() {
-		$scope.map.marker = new google.maps.Marker({
-			title: $scope.truck.name,
-			map: $scope.map.control,
-			position: $scope.map.control.getCenter(),
-			visible: true,
-			draggable: true,
-
-			icon: {
-				url: '/img/marker.png',
-				size: {width: 64, height: 64},
-				scaledSize: {width: 64, height: 64}
-			}
-		});
-
-		console.log($scope.map.control.getCenter());
-
-		google.maps.event.addListener($scope.map.marker, 'dragend', function() {
-			console.log($scope.map.marker.getPosition());
-		});
-	}
-
-	$scope.init();
 }]);

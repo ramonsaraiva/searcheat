@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 HEADER = {'Content-Type': 'application/json'}
 
@@ -110,6 +111,7 @@ TRUCKS_DATA = [
 
 def fill():
 	for truck in TRUCKS_DATA:
+		time.sleep(1)
 		response = requests.post('http://localhost:5000/api/trucks/', data=json.dumps(truck), headers=HEADER)
 		response = json.loads(response.text)
 		print('.. Truck {0}: {1}'.format(response['id'], response['name']))
