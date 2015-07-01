@@ -227,6 +227,9 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 
 		//coisa mais ridicula e escrota da galaxia, puta merda
 		// ramon: ehUAEHAUHEAUEHAUHEUAHEAUHEUAHeuAHEUAHEUHAE
+		var foodtypes = '';
+
+
 		var content = '<div  class="marker-popup">'+
 			'<div class="row vertical-align">'+
 				'<div class="col-xs-4">'+
