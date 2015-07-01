@@ -93,6 +93,11 @@ truck_foodtype = db.Table('truck_foodtype',
 	db.Column('foodtype_id', db.Integer, db.ForeignKey('foodtype.id'))
 )
 
+truck_event = db.Table('truck_event',
+	db.Column('truck_id', db.Integer, db.ForeignKey('truck.id')),
+	db.Column('event_id', db.Integer, db.ForeignKey('event.id'))
+)
+
 class FoodType(db.Model):
 	__tablename__ = 'foodtype'
 	
@@ -129,6 +134,7 @@ class Truck(db.Model):
 
 	foodtypes = db.relationship('FoodType', secondary=truck_foodtype, backref=db.backref('trucks', lazy='dynamic'))
 
+	linked_events = db.relationship('Event', secondary=truck_event, backref=db.backref('linked_trucks', lazy='dynamic'))
 	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=True)
 
 	# dates
@@ -180,6 +186,9 @@ class Event(db.Model):
 
 	geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)
 	geoposition = db.relationship('Geoposition', backref=db.backref('event', uselist=False))
+
+	city_id = db.Column(db.Integer, db.ForeignKey('city.id'), nullable=False)
+	city = db.relationship('City', backref=db.backref('event', uselist=False))
 
 	start_date = db.Column(db.DateTime(), nullable=False)
 	end_date = db.Column(db.DateTime(), nullable=False)
