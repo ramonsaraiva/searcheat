@@ -184,3 +184,10 @@
 	background-color: rgba(212, 63, 58, 0.3);
 	opacity: 1;
 }
+
+#legend
+{
+	background-color: white;
+	width: 100px;
+	height: 100px;
+}
