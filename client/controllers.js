@@ -99,6 +99,9 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			for (var i = 0, truck; truck = $scope.city.trucks[i]; i++)
 			{
 				truck.visible = true;
+				
+				var address_splitted = truck.address.split(',');
+				truck.address = address_splitted[0] + address_splitted[1];
 
 				for (var j = 0, foodtype; foodtype = truck.foodtypes[j]; j++)
 				{

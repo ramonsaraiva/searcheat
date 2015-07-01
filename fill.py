@@ -52,9 +52,60 @@ TRUCKS_DATA = [
 			'longitude': -51.061647,
 			'accuracy': 8
 		},
-		'foodtypes': [11, 12],
+		'foodtypes': [6, 10, 17],
 		'icon': 'lu.jpg'
-	}
+	},
+	{
+		'name': 'Brutus Truck',
+		'geoposition': {
+			'latitude': -29.688357,
+			'longitude': -51.133437,
+			'accuracy': 8
+		},
+		'foodtypes': [1, 2, 15],
+		'icon': 'lu.jpg'
+	},
+	{
+		'name': 'Lowie Doces',
+		'geoposition': {
+			'latitude': -29.683974,
+			'longitude': -51.133689,
+			'accuracy': 8
+		},
+		'foodtypes': [13, 17, 16],
+		'icon': 'lu.jpg'
+	},
+	{
+		'name': 'Massas do Beto',
+		'geoposition': {
+			'latitude': -29.684610,
+			'longitude': -51.130411,
+			'accuracy': 8
+		},
+		'foodtypes': [5, 15, 16],
+		'icon': 'lu.jpg'
+	},
+	{
+		'name': 'Japesca',
+		'geoposition': {
+			'latitude': -29.680607,
+			'longitude': -51.129014,
+			'accuracy': 8
+		},
+		'foodtypes': [7, 8],
+		'icon': 'lu.jpg'
+	},
+	{
+		'name': 'Veg Truck',
+		'geoposition': {
+			'latitude': -29.687854,
+			'longitude': -51.127710,
+			'accuracy': 8
+		},
+		'foodtypes': [12, 11],
+		'icon': 'lu.jpg'
+	},
+
 ]
 
 def fill():

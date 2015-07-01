@@ -55,8 +55,15 @@
 				</div>
 				<!-- list -->
 				<div id="truck-list" class="col-xs-4 full-height">
-					<button class="btn btn-danger form-control" ng-click="create()" style="position: fixed; float: left; z-index: 50; width: 30px;">+</button>
-					<button class="btn btn-danger form-control" ng-click="filter = !filter" style="position: fixed; float: left; z-index: 50; width: 30px; margin-left: 30px;">F</button>
+					<div class="row">
+						<div class="col-xs-8">
+							<button class="btn btn-danger form-control" ng-click="filter = !filter">Filtrar</button>
+						</div>
+						<div class="col-xs-4">
+							<button class="btn btn-danger form-control" ng-click="">+</button>
+						</div>
+					</div>
+					<div id="truck-scroll" class="full-height trucks">
 					<div ng-show="filter" class="col-xs-12">
 						<div class="row">
 							<div class="col-xs-1" ng-repeat="foodtype in foodtypes">
@@ -65,24 +72,22 @@
 						</div>
 						<hr/>
 					</div>
-					<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-show="truck.visible" ng-class-odd="'list-row-odd'" ng-class-even="'list-row-even'" ng-click="detailed(truck.id)">
-						<div class="col-xs-2">
-							<img ng-src="{{truck.icon_url}}" class="img-responsive img-rounded truck-icon center-block" />
-						</div>
-						<div class="col-xs-4">
-							<h2><strong>{{ truck.name }}</strong></h2>
-							<p>{{ truck.address }}</p>
-							<p><small style="color: rgba(255,255,255,0.5)">{{ truck.geoposition.latitude }} / {{ truck.geoposition.longitude }}</small></p>
-						</div>
-						<div class="col-xs-3 text-center">
-							<div class="row">
-								<div class="col-xs-2" ng-repeat="foodtype in truck.foodtypes">
-									<img class="img-responsive center-block" ng-src="/img/foodtypes/{{ foodtype.slug }}.png" />
+						<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-show="truck.visible" ng-class-odd="" ng-class-even="" ng-click="detailed(truck.id)">
+							<div class="col-xs-2">
+								<img ng-src="{{truck.icon_url}}" class="img-responsive img-rounded truck-icon center-block" />
+							</div>
+							<div class="col-xs-6">
+								<h2><strong>{{ truck.name }}</strong></h2>
+								<p><strong>32 metros de você</strong></p>
+								<p>{{ truck.address }}</p>
+							</div>
+							<div class="col-xs-4 text-center">
+								<div class="row">
+									<div class="col-xs-3" ng-repeat="foodtype in truck.foodtypes">
+										<img class="img-responsive center-block" ng-src="/img/foodtypes/{{ foodtype.slug }}.png" />
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-xs-3">
-							<p><strong>Distância: 300m</strong></p>
 						</div>
 					</div>
 				</div>
