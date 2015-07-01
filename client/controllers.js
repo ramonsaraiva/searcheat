@@ -194,10 +194,10 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 			//console.log('igualop');
 		});
 
-		for(var i in $scope.city.trucks)
+		for(var i = 0, truck; truck = $scope.city.trucks[i]; i++)
 		{
-			var opts = jQuery.extend({}, $scope.city.trucks[i]);
-			$scope.create_marker(opts);
+			var state = 'unofficial';
+			$scope.create_marker(truck, state);
 		}
 
 		$scope.create_legend();
@@ -211,15 +211,15 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		$scope.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 	}
 
-	$scope.create_marker = function(opts)
+	$scope.create_marker = function(place, state)
 	{
 		var marker = new google.maps.Marker({
-			title: opts.name,
+			title: place.name,
 			map: $scope.map,
-			position: new google.maps.LatLng(opts.geoposition.latitude, opts.geoposition.longitude),
+			position: new google.maps.LatLng(place.geoposition.latitude, place.geoposition.longitude),
 			visible: true,
 			icon: {
-				url: '/img/marker.png',
+				url: '/img/markers/marker-' + state + '.png',
 				size: {width: 64, height: 64},
 				scaledSize: {width: 64, height: 64}
 			}
@@ -230,11 +230,11 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		var content = '<div  class="marker-popup">'+
 			'<div class="row vertical-align">'+
 				'<div class="col-xs-4">'+
-					'<img src="' + opts.icon_url + '" class="img-responsive img-circle" /></a>'+
+					'<img src="' + place.icon_url + '" class="img-responsive img-circle" /></a>'+
 				'</div>'+
 				'<div class="col-xs-8">'+
-					'<p>' + opts.name + '</p>'+
-					'<p><small>Última alteração de posição: ' + opts.last_update + '</small></p>'+
+					'<p>' + place.name + '</p>'+
+					'<p><small>Última alteração de posição: ' + place.last_update + '</small></p>'+
 				'</div>'+
 			'</div>'+
 		'</div>';
