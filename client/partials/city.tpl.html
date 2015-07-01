@@ -2,7 +2,7 @@
 
 <div id="city-view" class="full-height" ng-controller="city_controller">
 	<div class="row full-height no-header text-center">
-		<div class="full-height col-lg-8 col-md-8 col-sm-10 col-xs-offset-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
+		<div class="full-height col-xs-12">
 			<div class="row">
 				<div class="col-xs-12">
 					<a href="#/"><img src="/img/searcheat_horizontal.png" class="img-responsive center-block" style="width: 200px; margin-top: 10px;"/></a>
@@ -13,22 +13,9 @@
 					</div>
 				</div>
 			</div>
-
-			<ul class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active col-xs-4">
-					<a data-target="#map-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a>
-				</li>
-				<li role="presentation" class="col-xs-4">
-					<a data-target="#list-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a>
-				</li>
-				<li role="presentation" class="col-xs-4">
-					<a data-target="#detailed-tab" aria-controls="home" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
-				</li>
-			</ul>
-
-			<div class="full-height tab tab-content">
-				<!-- MAP TAB -->
-				<div id="map-tab" class="full-height tab-pane active">
+			<div class="row full-height">
+				<!-- map -->
+				<div class="col-xs-8 full-height">
 					<div id="legend">
 						<div class="row vertical-align text-left">
 							<div class="col-xs-3">
@@ -66,10 +53,8 @@
 					<div id="map-canvas" class="full-height">
 					</div>
 				</div>
-				<!-- END OF MAP TAB -->
-
-				<!-- LIST TAB -->
-				<div id="list-tab" class="full-height tab-pane text-left">
+				<!-- list -->
+				<div id="truck-list" class="col-xs-4 full-height">
 					<button class="btn btn-danger form-control" ng-click="create()" style="position: fixed; float: left; z-index: 50; width: 30px;">+</button>
 					<button class="btn btn-danger form-control" ng-click="filter = !filter" style="position: fixed; float: left; z-index: 50; width: 30px; margin-left: 30px;">F</button>
 					<div ng-show="filter" class="col-xs-12">
@@ -101,60 +86,35 @@
 						</div>
 					</div>
 				</div>
-				<!-- END OF LIST TAB -->
+			</div>
+			<!--
+				<div ng-cloak ng-show="creating">
+					<div id="register-truck" ng-controller="register_truck_controller">
+						<h3>Mapa</h3>
+						<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+						<div id="register-map" style="height: 400px;"></div>
+						<label>Cidade:</label><br/>
+						<input type="text" ng-model="truck.city"/>
+						<label>Nome:</label>
+						<input type="text" ng-model="truck.name"/>
 
-				<div id="detailed-tab" class="full-height tab-pane">
-					<div ng-cloak ng-hide="creating" class="row">
-						<div class="col-xs-12">
-							<div id="detailed-name" class="row vertical-align">
-								<div class="col-xs-2 text-center">
-									<img ng-src="{{ truck.icon_url }}" class="img-responsive img-rounded truck-icon-detailed center-block" />
-								</div>
-								<div class="col-xs-4 col-xs-offset-1 text-left">
-									<h1><strong>{{ truck.name }}</strong></h1>
-									<p>{{ truck.address }}</p>
-									<p><strong>Distância: 300m</strong></p>
-								</div>
-								<div class="col-xs-5 text-center">
-									<div class="row">
-										<div class="col-xs-2 center-block" ng-repeat="foodtype in truck.foodtypes">
-											<img class="img-responsive" ng-src="/img/foodtypes/{{ foodtype.slug }}.png" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div ng-cloak ng-show="creating">
-						<div id="register-truck" ng-controller="register_truck_controller">
-							<h3>Mapa</h3>
-							<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-							<div id="register-map" style="height: 400px;"></div>
-							<label>Cidade:</label><br/>
-							<input type="text" ng-model="truck.city"/>
-							<label>Nome:</label>
-							<input type="text" ng-model="truck.name"/>
+						<h3>Opcional</h3>
+						<label>Tipos de comida:</label><br/>
+						<select ng-model="truck.types">
+						</select>
+						<label>Contato:</label>
+						<input type="text" ng-model="truck.contact.twitter"/>
+						<input type="text" ng-model="truck.contact.facebook"/>
+						<input type="text" ng-model="truck.contact.phone"/>
 
-							<h3>Opcional</h3>
-							<label>Tipos de comida:</label><br/>
-							<!-- ou radio seila -->
-							<select ng-model="truck.types">
-							</select>
-							<label>Contato:</label>
-							<input type="text" ng-model="truck.contact.twitter"/>
-							<input type="text" ng-model="truck.contact.facebook"/>
-							<input type="text" ng-model="truck.contact.phone"/>
-
-							<h3>Só quando for registrado oficialmente</h3>
-							<label>Ícone:</label><br/>
-							<label>Cardapio:</label><br/>
-							<label>Localização atual:</label><br/>
-							<label>Última atualização:</label>
-						</div>
+						<h3>Só quando for registrado oficialmente</h3>
+						<label>Ícone:</label><br/>
+						<label>Cardapio:</label><br/>
+						<label>Localização atual:</label><br/>
+						<label>Última atualização:</label>
 					</div>
 				</div>
-			</div>
-
+			-->
 		</div>
 	</div>
 </div>

@@ -50,6 +50,7 @@
 	background: rgba(0, 0, 0, 0.4);
 }
 
+/*
 .nav-tabs > li > a
 {
 	color: #FFF;
@@ -70,10 +71,12 @@
 	border-color: rgba(255, 255, 255, 0.1);
 	color: #D9534F;
 }
+*/
 
 /* eh soh isso mesmo pra funcionar a scrollbar? lol */
-#list-tab
+#truck-list
 {
+	background: rgba(0, 0, 0, 0.6);
 	overflow: auto;
 }
 

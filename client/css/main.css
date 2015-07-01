@@ -94,9 +94,9 @@ option
 
 #view
 {
-	max-width: 910px;
+	/*max-width: 910px;
 	min-width: 410px;
-	margin: 0 auto;
+	margin: 0 auto;*/
 }
 
 .full-height
@@ -107,14 +107,8 @@ option
 
 .full-height.no-header
 {
-	height: calc(100% - 100px);
+	height: calc(100% - 150px);
 	/*overflow-y: hidden;*/
-}
-
-.full-height.tab
-{
-	background: rgba(0, 0, 0, 0.6);
-	height: calc(100% - 120px);
 }
 
 .vertical-align
