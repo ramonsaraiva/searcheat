@@ -1,0 +1,24 @@
+<div id="register-truck" ng-controller="register_truck_controller">
+	<h3>Mapa</h3>
+	<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+	<div id="register-map" style="height: 400px;"></div>
+	<label>Cidade:</label><br/>
+	<input type="text" ng-model="truck.city"/>
+	<label>Nome:</label>
+	<input type="text" ng-model="truck.name"/>
+
+	<h3>Opcional</h3>
+	<label>Tipos de comida:</label><br/>
+	<select ng-model="truck.types">
+	</select>
+	<label>Contato:</label>
+	<input type="text" ng-model="truck.contact.twitter"/>
+	<input type="text" ng-model="truck.contact.facebook"/>
+	<input type="text" ng-model="truck.contact.phone"/>
+
+	<h3>Só quando for registrado oficialmente</h3>
+	<label>Ícone:</label><br/>
+	<label>Cardapio:</label><br/>
+	<label>Localização atual:</label><br/>
+	<label>Última atualização:</label>
+</div>
