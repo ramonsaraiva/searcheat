@@ -129,6 +129,8 @@ class Truck(db.Model):
 
 	foodtypes = db.relationship('FoodType', secondary=truck_foodtype, backref=db.backref('trucks', lazy='dynamic'))
 
+	event_id = db.Column(db.Integer, db.ForeignKey('event.id'), nullable=True)
+
 	# dates
 	creation_date = db.Column(db.DateTime(), nullable=False)
 	last_update = db.Column(db.DateTime(), nullable=False)
@@ -168,6 +170,41 @@ class Truck(db.Model):
 		self.creation_date = datetime.now()
 		self.last_update = datetime.now()
 
+class Event(db.Model):
+	__tablename__ = 'event'
+
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(64))
+	slug = db.Column(db.String(64))
+	description = db.Column(db.Text)
+
+	geoposition_id = db.Column(db.Integer, db.ForeignKey('geoposition.id', ondelete='CASCADE'), nullable=False)
+	geoposition = db.relationship('Geoposition', backref=db.backref('event', uselist=False))
+
+	start_date = db.Column(db.DateTime(), nullable=False)
+	end_date = db.Column(db.DateTime(), nullable=False)
+
+	trucks = db.relationship('Truck', backref=db.backref('event', uselist=False))
+
+	@property
+	def __repr__(self):
+		return '<Event {0}:{1}>'.format(self.id, self.name)
+
+	def slugify(self):
+		self.slug = slugify(self.name, '-')
+
+	@property
+	def serialize(self):
+		return {
+			'id': self.id,
+			'name': self.name,
+			'slug': self.slug,
+			'description': self.description,
+			'geoposition': self.geoposition.serialize,
+			'start_date': self.last_update.strftime('%d/%m/%Y'),
+			'end_date': self.last_update.strftime('%d/%m/%Y'),
+			'trucks': [t.serialize for t in self.trucks]
+		}
+
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	
