@@ -77,6 +77,10 @@
 #truck-list
 {
 	background: rgba(0, 0, 0, 0.6);
+}
+
+#truck-scroll
+{
 	overflow: auto;
 }
 
@@ -84,6 +88,11 @@
 {
 	padding: 10px;
 	cursor: pointer;
+}
+
+.list-row:hover
+{
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .list-row-odd
@@ -121,16 +130,6 @@
 #detailed-name
 {
 	padding: 10px;
-}
-
-#legend
-{
-	color: black;
-}
-
-#legend h3
-{
-	color: black;
 }
 
 .controls
@@ -190,8 +189,9 @@
 
 #legend
 {
-	width: 20%;
+	width: 15%;
 	background-color: rgba(255, 255, 255, 0.3);
+	color: black;
 	font-size: 1.2em;
 }
 

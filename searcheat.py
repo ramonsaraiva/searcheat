@@ -60,7 +60,7 @@ def reset():
 		'Cachorro Quente',	# 4
 		'Massas',			# 5
 		'Wrap',				# 6
-		'Peixes',			# 7
+		'Peixe',			# 7
 		'Japonesa',			# 8
 		'Mexicana',			# 9
 		'Indiana',			# 10
@@ -83,3 +83,13 @@ def reset():
 
 	db.session.commit()
 	fill()
+
+@app.cli.command()
+def tornado():
+	from tornado.wsgi import WSGIContainer
+	from tornado.httpserver import HTTPServer
+	from tornado.ioloop import IOLoop
+
+	sv = HTTPServer(WSGIContainer(app))
+	sv.listen(5000)
+	IOLoop.instance().start()

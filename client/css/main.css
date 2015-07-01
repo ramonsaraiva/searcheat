@@ -111,6 +111,11 @@ option
 	/*overflow-y: hidden;*/
 }
 
+.full-height.trucks
+{
+	height: calc(100% - 42px);
+}
+
 .vertical-align
 {
 	display: flex;
