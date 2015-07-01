@@ -128,7 +128,7 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		{
 			$scope.foodtypes_selected.push(id);
 		}
-			
+
 		if ($scope.foodtypes_selected.length == 0)
 		{
 			for (var i = 0, truck, marker; truck = $scope.city.trucks[i], marker = $scope.map_markers[i]; i++)
@@ -206,16 +206,8 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 	// essa funcao cria uma lenda
 	$scope.create_legend = function()
 	{
-		var legend = document.createElement('div');
-		legend.id = 'legend';
-		var content = [];
-		content.push('<h3>header</h3>');
-		content.push('<p>Ativos</p>');
-		content.push('<p>Inativos</p>');
-		content.push('<p>Eventos</p>');
-		legend.innerHTML = content.join('');
+		var legend = document.getElementById('legend');
 		legend.index = 1;
-		console.log(legend.innerHTML);
 		$scope.map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
 	}
 
