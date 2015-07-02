@@ -200,8 +200,21 @@ controllers.controller('city_controller', ['$scope', '$rootScope', '$routeParams
 		for(var i = 0, truck; truck = $scope.city.trucks[i]; i++)
 		{
 			var state = 'unofficial';
+
+			if (truck.opened)
+			{
+				state = 'online';
+			}
+			else
+			{
+				state = 'offline';
+			}
+
 			$scope.create_marker(truck, state);
 		}
+
+		//var clusterer_options = { styles: [ width: 64, height: 64 ] };
+		$scope.map_clusterer = new MarkerClusterer($scope.map, $scope.map_markers) //, clusterer_options);
 
 		$scope.create_legend();
 	};

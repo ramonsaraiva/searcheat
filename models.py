@@ -1,4 +1,5 @@
 import re
+import random
 from datetime import datetime
 
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -132,6 +133,8 @@ class Truck(db.Model):
 	address = db.Column(db.String(128))
 	icon = db.Column(db.String(64))
 
+	opened = db.Column(db.Boolean())
+
 	foodtypes = db.relationship('FoodType', secondary=truck_foodtype, backref=db.backref('trucks', lazy='dynamic'))
 
 	linked_events = db.relationship('Event', secondary=truck_event, backref=db.backref('linked_trucks', lazy='dynamic'))
@@ -158,7 +161,8 @@ class Truck(db.Model):
 			'icon_url': '{0}{1}'.format('/icons/', self.icon),
 			'last_update': self.last_update.strftime('%d/%m/%Y'),
 			'foodtypes': [f.serialize for f in self.foodtypes],
-			'foodtypes_ids': [f.id for f in self.foodtypes]
+			'foodtypes_ids': [f.id for f in self.foodtypes],
+			'opened': self.opened
 		}
 
 	def create(self, data):
@@ -172,6 +176,9 @@ class Truck(db.Model):
 
 		self.address = geo.reverse_geocode(self.geoposition.latitude,
 												self.geoposition.longitude).formatted_address
+
+		# so pra teste
+		self.opened = bool(random.getrandbits(1))
 
 		self.creation_date = datetime.now()
 		self.last_update = datetime.now()

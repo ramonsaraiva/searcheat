@@ -15,7 +15,7 @@
 			</div>
 			<div class="row full-height">
 				<!-- map -->
-				<div class="col-xs-8 full-height">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-7 full-height">
 					<div id="legend">
 						<div class="row vertical-align text-left">
 							<div class="col-xs-3">
@@ -54,7 +54,8 @@
 					</div>
 				</div>
 				<!-- list -->
-				<div id="truck-list" class="col-xs-4 full-height">
+				<div id="truck-list" class="col-xs-6 col-sm-6 col-md-6 col-lg-5 full-height">
+					<!--
 					<div class="row">
 						<div class="col-xs-8">
 							<button class="btn btn-danger form-control" ng-click="filter = !filter">Filtrar</button>
@@ -63,6 +64,7 @@
 							<button class="btn btn-danger form-control" ng-click="">+</button>
 						</div>
 					</div>
+					-->
 					<div id="truck-scroll" class="full-height trucks">
 					<div ng-show="filter" class="col-xs-12">
 						<div class="row">
@@ -74,7 +76,7 @@
 					</div>
 						<div class="row vertical-align list-row" ng-repeat="truck in city.trucks" ng-show="truck.visible" ng-class-odd="" ng-class-even="" ng-click="detailed(truck.id)">
 							<div class="col-xs-2">
-								<img ng-src="{{truck.icon_url}}" class="img-responsive img-rounded truck-icon center-block" />
+								<img ng-src="{{truck.icon_url}}" class="img-responsive img-rounded truck-icon" />
 							</div>
 							<div class="col-xs-6">
 								<h2><strong>{{ truck.name }}</strong></h2>
