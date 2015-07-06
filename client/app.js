@@ -3,8 +3,8 @@
 var app = angular.module('searcheat', [
 	'ngRoute',
 	'ngGeolocation',
-	'controllers',
-	'services'
+	'services',
+	'controllers'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {

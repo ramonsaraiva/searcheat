@@ -1,31 +1,36 @@
 'use strict';
 
-angular.module('controllers').controller('truck-form-controller', ['$scope', '$routeParams', function($scope, $routeParams) {
+angular.module('controllers').controller('truck-form-controller', ['$scope', '$routeParams', 'db', function($scope, $routeParams, db) {
 	$scope.truck = {};
 	$scope.map =  {};
 
 	$scope.city = {};
 	$scope.city.id = $routeParams.id;
 
+	$scope.db = new db('cities');
+
 	//select de tipos de comida cadastrados
 
 	$scope.init = function() {
 		$scope.map.create();
 
-		if(!$scope.city.id)
+		if($scope.city.id)
 		{
-			console.log('sem id');
-			//aqui agente pega o nome da cidade baseado no geopos atual do mapa;
-
-			//e se tiver gps ativado, ja move o center e zoom do mapa pra cidade
-			//do cara;
+			console.log($scope.city.id);
+			$scope.db.read($scope.city.id)
+			.success(function(data) {
+				console.log(data);
+				var pos = new google.maps.LatLng(data.geoposition.latitude, data.geoposition.longitude);
+				$scope.map.control.setCenter(pos);
+				$scope.map.control.setZoom(14);
+				$scope.map.marker.setPosition($scope.map.control.getCenter());
+			})
+			.error(function(e) {
+				console.log(e);
+			});
 		}
-		else
-		{
-			console.log('id: ', $scope.city.id);
-		}
 
-		//aqui assume que ja tem id, e ai qq faz?
+		//e se tiver gps ativado, ja move o center e zoom do mapa pra cidade do cara;
 	};
 
 	//so i'm following the map that leads to you
