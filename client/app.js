@@ -10,12 +10,12 @@ var app = angular.module('searcheat', [
 app.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl: 'partials/guidance.tpl.html'
+			templateUrl: 'partials/guidance-view.tpl.html'
 		})
 		.when('/cidade/:id/', {
-			templateUrl: 'partials/city.tpl.html'
+			templateUrl: 'partials/city-view.tpl.html'
 		})
-		.when('/truck-form', {
+		.when('/truck-form/:id/', {
 			templateUrl: 'partials/truck-form.tpl.html'
 		});
 }]);

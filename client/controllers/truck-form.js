@@ -4,8 +4,23 @@ angular.module('controllers').controller('truck-form-controller', ['$scope', '$r
 	$scope.truck = {};
 	$scope.map =  {};
 
+	$scope.city = {};
+	$scope.city.id = $routeParams.id;
+
+	//select de tipos de comida cadastrados
+
 	$scope.init = function() {
 		$scope.map.create();
+
+		if(!$scope.city.id)
+		{
+			//aqui agente pega o nome da cidade baseado no geopos atual do mapa;
+
+			//e se tiver gps ativado, ja move o center e zoom do mapa pra cidade
+			//do cara;
+		}
+
+		//aqui assume que ja tem id, e ai qq faz?
 	};
 
 	//so i'm following the map that leads to you
@@ -61,11 +76,18 @@ angular.module('controllers').controller('truck-form-controller', ['$scope', '$r
 			}
 		});
 
-		console.log($scope.map.control.getCenter());
+		//console.log($scope.map.control.getCenter());
 
 		google.maps.event.addListener($scope.map.marker, 'dragend', function() {
-			console.log($scope.map.marker.getPosition());
+			var pos = $scope.map.marker.getPosition();
+			$scope.truck.geoposition = {
+				latitude: pos.lat(),
+				longitude: pos.lng()
+			};
 		});
+	}
+
+	$scope.create = function() {
 	}
 
 	$scope.init();

@@ -1,27 +1,48 @@
 <link rel="stylesheet" href="css/truck-form.css">
 
-<div id="truck-form" ng-controller="truck-form-controller">
-	<h3>Mapa</h3>
+<div class="container" id="truck-form" ng-controller="truck-form-controller">
+	<h1>Cadastro de Truck</h1>
+
+	<h3 class="text-center">Localização</h3>
 
 	<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-	<div id="truck-form-map" style="width: 500px; height: 500px;">
+	<div id="truck-form-map" style="width: 500px; height: 500px; margin: 0 auto;">
+	</div>
+	<hr/>
+
+	<!-- esse aqui eh meio que read-only, preenchido pelo controller -->
+	<input type="hidden" ng-model="truck.city"/>
+
+	<div class="form-group">
+		<label>Nome:</label>
+		<input class="form-control" ng-model="truck.name">
 	</div>
 
-	<label>Cidade:</label><br/>
-	<input type="text" ng-model="truck.city"/>
-	<label>Nome:</label>
-	<input type="text" ng-model="truck.name"/>
+	<h3 class="text-center">Opcional</h3>
 
-	<h3>Opcional</h3>
-	<label>Tipos de comida:</label><br/>
-	<select ng-model="truck.types">
-	</select>
-	<label>Contato:</label>
-	<input type="text" ng-model="truck.contact.twitter"/>
-	<input type="text" ng-model="truck.contact.facebook"/>
-	<input type="text" ng-model="truck.contact.phone"/>
+	<div class="form-group">
+		<label>Tipos de comida:</label>
+		<select class="form-control" ng-model="truck.types">
+		</select>
+	</div>
 
-	<h3>Só quando for registrado oficialmente</h3>
+	<h3 class="text-center">Contato</h3>
+	<div class="form-group">
+		<label>Twitter:</label>
+		<input class="form-control" type="text" ng-model="truck.contact.twitter"/>
+	</div>
+
+	<div class="form-group">
+		<label>Facebook:</label>
+		<input class="form-control" type="text" ng-model="truck.contact.facebook"/>
+	</div>
+
+	<div class="form-group">
+		<label>Phone:</label>
+		<input class="form-control" type="text" ng-model="truck.contact.phone"/>
+	</div>
+
+	<h1>Só quando for registrado oficialmente</h1>
 	<label>Ícone:</label><br/>
 	<label>Cardapio:</label><br/>
 	<label>Localização atual:</label><br/>
