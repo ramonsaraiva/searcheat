@@ -1,3 +1,25 @@
+#title img
+{
+	width: 120px;
+}
+
+#subtitle
+{
+	margin-top: 15px;
+	margin-bottom: 20px;
+	background: rgba(0, 0, 0, 0.4);
+}
+
+#truck-form
+{
+	background: rgba(0, 0, 0, 0.6);
+}
+
+#truck-scroll
+{
+	overflow: auto;
+}
+
 #truck-form label
 {
 	font-size: 2em;

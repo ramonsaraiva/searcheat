@@ -1,25 +1,36 @@
 <link rel="stylesheet" href="css/truck-form.css">
 
-<div class="container" id="truck-form" ng-controller="truck-form-controller">
-	<h1>Cadastro de Truck</h1>
-
-	<h3 class="text-center">Localização</h3>
-
-	<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
-	<div id="truck-form-map" style="width: 500px; height: 500px; margin: 0 auto;">
-	</div>
-	<hr/>
-
+<div id="city-view" class="full-height" ng-controller="truck-form-controller">
+	<div class="row full-height no-header text-center">
+		<div class="full-height col-xs-12">
+			<div class="row">
+				<div class="col-xs-12">
+					<a href="#/"><img src="/img/searcheat_horizontal.png" class="img-responsive center-block" style="width: 200px; margin-top: 10px;"/></a>
+				</div>
+				<div class="col-xs-12">
+					<div id="subtitle">
+						<h1 ng-cloak>CADASTRO DE FOODTRUCK</h1>
+					</div>
+				</div>
+			</div>
+			<div class="row full-height">
+				<!-- map -->
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-7 full-height">
+					<input style="color: black;" id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+					<div id="truck-form-map" class="full-height">
+					</div>
+				</div>
+				<!-- list -->
+				<div id="truck-form" class="col-xs-6 col-sm-6 col-md-6 col-lg-5 full-height">
+					<div id="truck-scroll" class="full-height trucks">
+					
 	<div class="form-group">
 		<label>Nome:</label>
 		<input class="form-control" ng-model="truck.name">
 	</div>
 
-	<h3 class="text-center">Opcional</h3>
-
-	<div class="form-group">
-		<label>Tipos de comida:</label>
-		<div ng-repeat="foodtype in foodtypes">
+	<div class="row">
+		<div class="col-xs-2" ng-repeat="foodtype in foodtypes">
 			<img src="/img/foodtypes/{{ foodtype.slug }}.png"
 			class="img-circle img-map center-block"
 			ng-class="foodtypes_selected.indexOf(foodtype.id) >= 0 ? 'selected' : ''"
@@ -51,4 +62,9 @@
 	<label>Cardapio:</label><br/>
 	<label>Localização atual:</label><br/>
 	<label>Última atualização:</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
