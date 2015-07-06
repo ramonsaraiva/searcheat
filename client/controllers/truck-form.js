@@ -9,6 +9,7 @@ angular.module('controllers').controller('truck-form-controller', ['$scope', '$r
 
 	$scope.db = new db('cities');
 	$scope.foodtypes_db = new db('foodtypes');
+	$scope.trucks_db = new db('trucks');
 
 	$scope.foodtypes = {};
 
@@ -97,18 +98,34 @@ angular.module('controllers').controller('truck-form-controller', ['$scope', '$r
 			}
 		});
 
-		//console.log($scope.map.control.getCenter());
+		var center = $scope.map.control.getCenter();
+		$scope.truck.geoposition = {
+			latitude: center.lat(),
+			longitude: center.lng(),
+			accuracy: 8
+		};
+
+		console.log($scope.map.control.getCenter());
+		console.log($scope.map.marker.getPosition());
 
 		google.maps.event.addListener($scope.map.marker, 'dragend', function() {
 			var pos = $scope.map.marker.getPosition();
-			$scope.truck.geoposition = {
-				latitude: pos.lat(),
-				longitude: pos.lng()
-			};
+			$scope.truck.geoposition.latitude = pos.lat();
+			$scope.truck.geoposition.longitude = pos.lng();
+
+			console.log($scope.truck.geoposition);
 		});
 	}
 
-	$scope.create = function() {
+	$scope.submit = function() {
+		$scope.truck.foodtypes = [1, 2];
+		$scope.trucks_db.create($scope.truck)
+		.success(function(data) {
+			console.log(data);
+		})
+		.error(function(e) {
+			console.log(e);
+		});
 	}
 
 	$scope.init();
