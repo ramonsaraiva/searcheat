@@ -19,8 +19,12 @@
 
 	<div class="form-group">
 		<label>Tipos de comida:</label>
-		<select class="form-control" ng-model="truck.types">
-		</select>
+		<div ng-repeat="foodtype in foodtypes">
+			<img src="/img/foodtypes/{{ foodtype.slug }}.png"
+			class="img-circle img-map center-block"
+			ng-class="foodtypes_selected.indexOf(foodtype.id) >= 0 ? 'selected' : ''"
+			ng-click="foodtype_onclick(foodtype.id)"/>
+		</div>
 	</div>
 
 	<h3 class="text-center">Contato</h3>
