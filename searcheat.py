@@ -8,6 +8,7 @@ from models import FoodType
 
 from resources import Cities
 from resources import Trucks
+from resources import FoodTypes
 from resources import Geocode
 
 app = Flask(__name__)
@@ -23,6 +24,7 @@ api = Api(app)
 # resources
 api.add_resource(Cities, '/api/cities/', '/api/cities/<int:id>/')
 api.add_resource(Trucks, '/api/trucks/', '/api/trucks/<int:id>/')
+api.add_resource(FoodTypes, '/api/foodtypes/', '/api/foodtypes/<int:id>/')
 api.add_resource(Geocode, '/api/geocode/')
 
 @app.route('/')

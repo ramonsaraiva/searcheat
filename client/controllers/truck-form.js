@@ -8,6 +8,7 @@ angular.module('controllers').controller('truck-form-controller', ['$scope', '$r
 	$scope.city.id = $routeParams.id;
 
 	$scope.db = new db('cities');
+	$scope.foodtypes_db = new db('foodtypes');
 
 	//select de tipos de comida cadastrados
 
@@ -29,7 +30,16 @@ angular.module('controllers').controller('truck-form-controller', ['$scope', '$r
 				console.log(e);
 			});
 		}
-
+		else
+		{
+			$scope.foodtypes_db.list()
+				.success(function(data) {
+					console.log(data);
+				})
+				.error(function(e) {
+					console.log(e);
+				});
+		}
 		//e se tiver gps ativado, ja move o center e zoom do mapa pra cidade do cara;
 	};
 

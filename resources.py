@@ -74,6 +74,15 @@ class Trucks(Resource):
 		trucks = [t.serialize for t in Truck.query.order_by(Truck.name).all()]
 		return trucks
 
+class FoodTypes(Resource):
+	def get(self, id=None):
+		if id:
+			trucks = Truck.query.filter(Truck.city_id==id).all()
+			foodtypes = FoodType.query.filter(FoodType.trucks.any(Truck.id.in_([t.id for t in trucks]))).order_by(FoodType.priority, FoodType.id)
+			return [f.serialize for f in foodtypes]
+		foodtypes = [f.serialize for f in FoodType.query.order_by(FoodType.priority, FoodType.id)]
+		return foodtypes
+
 class Geocode(Resource):
 	def __init__(self):
 		self.reqparse = reqparse.RequestParser()

@@ -3,6 +3,7 @@
 angular.module('controllers').controller('city-controller', ['$scope', '$rootScope', '$routeParams', '$http', '$location', '$geolocation', 'db', function($scope, $rootScope, $routeParams, $http, $location, $geolocation, db) {
 	$scope.db = new db('cities');
 	$scope.trucks_db = new db('trucks');
+	$scope.foodtypes_db = new db('foodtypes');
 	$scope.city = {};
 
 	$scope.map = null;
@@ -50,22 +51,31 @@ angular.module('controllers').controller('city-controller', ['$scope', '$rootSco
 			$scope.create_map();
 			console.log($scope.city);
 
-			$scope.foodtypes = {};
 			for (var i = 0, truck; truck = $scope.city.trucks[i]; i++)
 			{
 				truck.visible = true;
-
 				var address_splitted = truck.address.split(',');
 				truck.address = address_splitted[0] + address_splitted[1];
-
-				for (var j = 0, foodtype; foodtype = truck.foodtypes[j]; j++)
-				{
-					$scope.foodtypes[foodtype.id] = { id: foodtype.id, name: foodtype.name, slug: foodtype.slug };
-				}
 			}
 		})
 		.error(function(e) {
 			$scope.city = null;
+		});
+
+	/* pega os foodtypes da cidade pra por no filter */
+	$scope.foodtypes_db.read($routeParams.id)
+		.success(function(data) {
+			$scope.foodtypes = {};
+
+			for (var i = 0, foodtype; foodtype = data[i]; i++)
+			{
+				$scope.foodtypes[foodtype.id] = { id: foodtype.id, name: foodtype.name, slug: foodtype.slug };
+			}
+
+			console.log($scope.foodtypes);
+		})
+		.error(function(e) {
+			console.log(e);
 		});
 
 	$scope.foodtype_onclick = function(id)
