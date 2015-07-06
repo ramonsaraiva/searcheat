@@ -12,10 +12,10 @@ app.config(['$routeProvider', function($routeProvider) {
 		.when('/', {
 			templateUrl: 'partials/guidance-view.tpl.html'
 		})
-		.when('/cidade/:id/', {
+		.when('/cidade/:id', {
 			templateUrl: 'partials/city-view.tpl.html'
 		})
-		.when('/truck-form/:id/', {
+		.when('/truck-form/:id?', {
 			templateUrl: 'partials/truck-form.tpl.html'
 		});
 }]);

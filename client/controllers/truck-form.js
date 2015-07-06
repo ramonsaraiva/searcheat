@@ -14,10 +14,15 @@ angular.module('controllers').controller('truck-form-controller', ['$scope', '$r
 
 		if(!$scope.city.id)
 		{
+			console.log('sem id');
 			//aqui agente pega o nome da cidade baseado no geopos atual do mapa;
 
 			//e se tiver gps ativado, ja move o center e zoom do mapa pra cidade
 			//do cara;
+		}
+		else
+		{
+			console.log('id: ', $scope.city.id);
 		}
 
 		//aqui assume que ja tem id, e ai qq faz?
