@@ -1,3 +1,5 @@
+from math import radians, cos, sin, asin, sqrt
+
 from flask import request
 from flask import jsonify
 
@@ -13,6 +15,17 @@ from models import Truck
 
 def get_format(f):
 	return f.split('.')[1]
+
+from math import radians, cos, sin, asin, sqrt
+
+def haversine(lat1, lon1, lat2, lon2):
+	lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+	dlon = lon2 - lon1 
+	dlat = lat2 - lat1 
+	a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+	c = 2 * asin(sqrt(a)) 
+	r = 6371 # Radius of earth in kilometers. Use 3956 for miles
+	return c * r
 
 class Cities(Resource):
 	def __init__(self):
@@ -95,7 +108,13 @@ class Geocode(Resource):
 
 		geo_data = geo.reverse_geocode(args['lat'], args['lng'])
 		city = db.session.query(City).filter(City.name==geo_data.city).first()
+
 		if not city:
 			# todo: retornar a cidade mais perto
 			return jsonify({'city': None})
+
+		trucks = list(city.trucks)
+		for truck in trucks:
+			print(haversine(truck.geoposition.latitude, truck.geoposition.longitude, args['lat'], args['lng']))
+
 		return jsonify(city.serialize)
