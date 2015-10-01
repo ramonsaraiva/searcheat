@@ -1,4 +1,5 @@
 from flask import request
+from flask import jsonify
 
 from flask.ext.restful import Resource
 from flask.ext.restful import reqparse
@@ -25,13 +26,13 @@ class Cities(Resource):
 
 		db.session.add(city)
 		db.session.commit()
-		return city.serialize
+		return jsonify(city.serialize)
 
 	def get(self, id=None):
 		if id:
-			return City.query.get_or_404(id).serialize
+			return jsonify(City.query.get_or_404(id).serialize)
 		cities = [c.serialize_simple for c in City.query.order_by(City.name).all()]
-		return cities
+		return jsonify(cities)
 
 class Trucks(Resource):
 	def __init__(self):
@@ -66,22 +67,22 @@ class Trucks(Resource):
 			truck.foodtypes.append(f)
 
 		db.session.commit()
-		return truck.serialize
+		return jsonify(truck.serialize)
 
 	def get(self, id=None):
 		if id:
-			return Truck.query.get_or_404(id).serialize
+			return jsonify(Truck.query.get_or_404(id).serialize)
 		trucks = [t.serialize for t in Truck.query.order_by(Truck.name).all()]
-		return trucks
+		return jsonify(trucks)
 
 class FoodTypes(Resource):
 	def get(self, id=None):
 		if id:
 			trucks = Truck.query.filter(Truck.city_id==id).all()
 			foodtypes = FoodType.query.filter(FoodType.trucks.any(Truck.id.in_([t.id for t in trucks]))).order_by(FoodType.priority, FoodType.id)
-			return [f.serialize for f in foodtypes]
+			return jsonify([f.serialize for f in foodtypes])
 		foodtypes = [f.serialize for f in FoodType.query.order_by(FoodType.priority, FoodType.id)]
-		return foodtypes
+		return jsonify(foodtypes)
 
 class Geocode(Resource):
 	def __init__(self):
@@ -93,4 +94,8 @@ class Geocode(Resource):
 		args = self.reqparse.parse_args()
 
 		geo_data = geo.reverse_geocode(args['lat'], args['lng'])
-		return {'city': geo_data.city}
+		city = db.session.query(City).filter(City.name==geo_data.city).first()
+		if not city:
+			# todo: retornar a cidade mais perto
+			return jsonify({'city': None})
+		return jsonify(city.serialize)

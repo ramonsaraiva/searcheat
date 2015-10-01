@@ -21,6 +21,13 @@ app.config.update({
 db.init_app(app)
 api = Api(app)
 
+@app.after_request
+def after_request(response):
+	response.headers.add('Access-Control-Allow-Origin', '*')
+	response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+	response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+	return response
+
 # resources
 api.add_resource(Cities, '/api/cities/', '/api/cities/<int:id>/')
 api.add_resource(Trucks, '/api/trucks/', '/api/trucks/<int:id>/')
@@ -93,5 +100,5 @@ def tornado():
 	from tornado.ioloop import IOLoop
 
 	sv = HTTPServer(WSGIContainer(app))
-	sv.listen(5000)
+	sv.listen(8080)
 	IOLoop.instance().start()
