@@ -111,10 +111,16 @@ class Geocode(Resource):
 
 		if not city:
 			# todo: retornar a cidade mais perto
-			return jsonify({'city': None})
+			# faz uma query pegando todas as cidades e ve qual a cidade que tem a menor distancia
+			# na lat/lng recebida e retorna
+			return jsonify({})
+			
+		city = dict(city.serialize)
+		foodtypes = set()
+		for truck in city['trucks']:
+			truck['haversine'] = haversine(truck['geoposition']['latitude'], truck['geoposition']['longitude'], args['lat'], args['lng'])
+			foodtypes.update([(f['id'], f['slug']) for f in truck['foodtypes']])
+		city['trucks'] = sorted(city['trucks'], key=lambda k: (not k['opened'], k['haversine']))
+		city['foodtypes'] = list(foodtypes)
 
-		trucks = list(city.trucks)
-		for truck in trucks:
-			print(haversine(truck.geoposition.latitude, truck.geoposition.longitude, args['lat'], args['lng']))
-
-		return jsonify(city.serialize)
+		return jsonify(city)
